@@ -4,94 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MD PRINCE | Digital Business Card</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* বেসিক স্টাইল */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body {
-            /* প্রিমিয়াম সার্কিট ব্যাকগ্রাউন্ড */
-            background-color: #f4f7f9;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d3dce6' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px;
+        :root {
+            --primary: #1e293b;
+            --secondary: #3b82f6;
+            --accent: #e74c3c;
+            --text-main: #334155;
+            --bg: #f8fafc;
         }
-        .container {
-            background: rgba(255, 255, 255, 0.95); max-width: 400px; width: 100%; border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); padding: 40px 20px; text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px);
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg); display: flex; justify-content: center; min-height: 100vh; }
+        
+        .profile-card {
+            width: 100%; max-width: 480px; background: white; min-height: 100vh;
+            position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.05);
         }
-        .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 15px; }
-        .name { font-size: 24px; color: #2c3e50; font-weight: 700; margin-bottom: 5px; letter-spacing: 1px; }
-        .bio { font-size: 13px; color: #5a6c7d; margin-bottom: 30px; line-height: 1.5; }
-        .divider { height: 1px; background: #e1e4e8; margin-bottom: 25px; }
 
-        /* বাটনগুলোর স্টাইল */
-        .btn-list { display: flex; flex-direction: column; gap: 12px; }
-        .btn {
-            display: flex; align-items: center; justify-content: flex-start; gap: 12px;
-            text-decoration: none; padding: 15px; border-radius: 12px; color: white;
-            font-size: 14px; font-weight: 600; transition: transform 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        /* Top Header & Image */
+        .header-bg { height: 160px; background: var(--primary); border-radius: 0 0 40px 40px; }
+        .profile-section { text-align: center; margin-top: -80px; padding: 0 20px; }
+        .profile-img { 
+            width: 140px; height: 140px; border-radius: 50%; border: 6px solid white;
+            object-fit: cover; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .btn:hover { transform: translateY(-3px); }
-        .btn i { font-size: 20px; width: 25px; text-align: center; }
+        .blood-tag {
+            background: var(--accent); color: white; padding: 4px 12px;
+            border-radius: 20px; font-size: 12px; font-weight: bold;
+            display: inline-block; margin-top: 10px;
+        }
 
-        /* প্রতিটি অ্যাপের কালার */
-        .whatsapp { background: #25D366; }
-        .linkedin { background: #0077B5; }
-        .facebook { background: #1877F2; }
-        .instagram { background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%); }
-        .tiktok { background: #000000; }
-        .email { background: #ea4335; }
-        .phone { background: #34B7F1; }
+        .user-info h1 { font-size: 24px; color: var(--primary); margin-top: 10px; font-weight: 700; }
+        .user-info p { font-size: 14px; color: #64748b; margin-bottom: 20px; }
 
-        .footer-text { font-size: 11px; color: #9aa0a6; margin-top: 30px; }
+        /* Action Buttons */
+        .primary-actions { display: flex; gap: 10px; padding: 0 20px 25px; }
+        .btn-action {
+            flex: 1; padding: 12px; border-radius: 12px; border: none;
+            font-weight: 600; cursor: pointer; display: flex; align-items: center;
+            justify-content: center; gap: 8px; text-decoration: none; font-size: 14px;
+        }
+        .save-btn { background: var(--secondary); color: white; }
+        .share-btn { background: #e2e8f0; color: var(--primary); }
+
+        /* Links Grid */
+        .links-container { padding: 0 20px 30px; }
+        .section-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.5px; margin: 20px 0 15px; border-left: 3px solid var(--secondary); padding-left: 8px; }
+        
+        .grid-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .link-item { text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+        .link-item i { 
+            width: 50px; height: 50px; border-radius: 15px; display: flex; 
+            align-items: center; justify-content: center; font-size: 22px; color: white;
+            transition: transform 0.2s;
+        }
+        .link-item:hover i { transform: scale(1.1); }
+        .link-item span { font-size: 11px; color: #475569; font-weight: 500; }
+
+        /* Brands Colors */
+        .bg-fb { background: #1877F2; } .bg-li { background: #0077B5; } .bg-ig { background: #E4405F; }
+        .bg-yt { background: #FF0000; } .bg-wa { background: #25D366; } .bg-tg { background: #26A5E4; }
+        .bg-tk { background: #000000; } .bg-x { background: #000000; } .bg-th { background: #000000; }
+        .bg-vb { background: #7360f2; } .bg-hp { background: #ff5722; } .bg-cv { background: #2ecc71; }
+
+        /* Payment & Address */
+        .info-card { background: #f1f5f9; padding: 15px; border-radius: 15px; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+        .info-card i { color: var(--secondary); font-size: 18px; }
+        .info-card-text { font-size: 13px; color: var(--text-main); }
+        .info-card-text strong { display: block; font-size: 11px; color: #94a3b8; text-transform: uppercase; }
+
+        .footer { text-align: center; padding: 40px 20px; color: #cbd5e1; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img src="https://i.ibb.co/3Wb0Xw6/default-avatar.png" alt="MD PRINCE" class="profile-img">
-        
-        <h1 class="name">MD PRINCE</h1>
-        <p class="bio">Diploma in Electronics Engineering<br>Patuakhali Polytechnic Institute</p>
-        <div class="divider"></div>
+<div class="profile-card">
+    <div class="header-bg"></div>
+    
+    <div class="profile-section">
+        <img src="IMG_20260409_150753.jpg" alt="MD PRINCE" class="profile-img">
+        <div class="user-info">
+            <h1>MD PRINCE</h1>
+            <p>Diploma Engineer (Electronics)</p>
+            <div class="blood-tag"><i class="fas fa-tint"></i> Blood Group: B+</div>
+        </div>
+    </div>
 
-        <div class="btn-list">
+    <div class="primary-actions">
+        <a href="tel:+8801326573302" class="btn-action save-btn">
+            <i class="fas fa-user-plus"></i> Save Contact
+        </a>
+        <button onclick="shareProfile()" class="btn-action share-btn">
+            <i class="fas fa-share-alt"></i> Share Profile
+        </button>
+    </div>
 
-            <a href="https://wa.me/8801721675237" target="_blank" class="btn whatsapp">
-                <i class="fab fa-whatsapp"></i> WhatsApp
-            </a>
-
-            <a href="https://linkedin.com/in/YOUR-LINKEDIN-USERNAME" target="_blank" class="btn linkedin">
-                <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-
-            <a href="https://facebook.com/YOUR-FACEBOOK-USERNAME" target="_blank" class="btn facebook">
-                <i class="fab fa-facebook-f"></i> Facebook
-            </a>
-
-            <a href="https://instagram.com/YOUR-INSTAGRAM-USERNAME" target="_blank" class="btn instagram">
-                <i class="fab fa-instagram"></i> Instagram
-            </a>
-
-            <a href="https://tiktok.com/@YOUR-TIKTOK-USERNAME" target="_blank" class="btn tiktok">
-                <i class="fab fa-tiktok"></i> TikTok
-            </a>
-
-            <a href="mailto:contact@prince.bro.bd" class="btn email">
-                <i class="fas fa-envelope"></i> contact@prince.bro.bd
-            </a>
-
-            <a href="tel:+8801721675237" class="btn phone">
-                <i class="fas fa-phone-alt"></i> Call Me Directly
-            </a>
-
+    <div class="links-container">
+        <div class="section-label">Connect with me</div>
+        <div class="grid-links">
+            <a href="https://wa.me/8801326573302" class="link-item"><i class="fab fa-whatsapp bg-wa"></i><span>WhatsApp</span></a>
+            <a href="https://www.facebook.com/mdprince3302" class="link-item"><i class="fab fa-facebook-f bg-fb"></i><span>Facebook</span></a>
+            <a href="https://www.linkedin.com/in/mdprince3302" class="link-item"><i class="fab fa-linkedin-in bg-li"></i><span>LinkedIn</span></a>
+            <a href="https://instagram.com/mdprince3302" class="link-item"><i class="fab fa-instagram bg-ig"></i><span>Instagram</span></a>
+            <a href="https://t.me/mdprince3302" class="link-item"><i class="fab fa-telegram-plane bg-tg"></i><span>Telegram</span></a>
+            <a href="viber://chat?number=8801326573302" class="link-item"><i class="fab fa-viber bg-vb"></i><span>Viber</span></a>
+            <a href="https://x.com/mdprince3302" class="link-item"><i class="fa-brands fa-x-twitter bg-x"></i><span>Twitter</span></a>
+            <a href="https://youtube.com/@mdprince302" class="link-item"><i class="fab fa-youtube bg-yt"></i><span>YouTube</span></a>
+            <a href="https://tiktok.com/@mdprince73302" class="link-item"><i class="fab fa-tiktok bg-tk"></i><span>TikTok</span></a>
+            <a href="https://www.threads.net/@mdprince3302" class="link-item"><i class="fa-brands fa-threads bg-th"></i><span>Threads</span></a>
+            <a href="https://hopenity.com/user/mdprince3302" class="link-item"><i class="fas fa-link bg-hp"></i><span>Hopenity</span></a>
+            <a href="https://drive.google.com/file/d/16j6xsn6o6O9KI-nzsN-riNscbZPNssEr/view" class="link-item"><i class="fas fa-file-pdf bg-cv"></i><span>Resume</span></a>
         </div>
 
-        <p class="footer-text">© 2026 MD PRINCE. All rights reserved.</p>
+        <div class="section-label">Payment (MFS)</div>
+        <div class="info-card">
+            <i class="fas fa-wallet"></i>
+            <div class="info-card-text">
+                <strong>Bkash / Nagad / Rocket</strong>
+                01326573302
+            </div>
+        </div>
+
+        <div class="section-label">Location Details</div>
+        <div class="info-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="info-card-text">
+                <strong>Present Address</strong>
+                Model Town, Keraniganj, Dhaka
+            </div>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-home"></i>
+            <div class="info-card-text">
+                <strong>Permanent Address</strong>
+                Bauphal, Patuakhali
+            </div>
+        </div>
     </div>
+
+    <div class="footer">
+        Digital Business Card &copy; 2026 MD PRINCE
+    </div>
+</div>
+
+<script>
+    // প্রোফাইল শেয়ার করার ফাংশন
+    function shareProfile() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'MD PRINCE | Digital Business Card',
+                url: window.location.href
+            }).catch(console.error);
+        } else {
+            alert("URL copied to clipboard: " + window.location.href);
+        }
+    }
+</script>
 
 </body>
 </html>
