@@ -13,23 +13,23 @@
         
         .main-card { width: 100%; max-width: 480px; background: #fff; border-radius: 40px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
 
-        /* Header Section */
+        /* Header */
         .header { height: 200px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); position: relative; }
         .profile-wrapper { text-align: center; margin-top: -100px; position: relative; z-index: 5; }
         .profile-img { width: 170px; height: 170px; border-radius: 50%; border: 8px solid white; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         .blood-badge { position: absolute; bottom: 15px; right: 33%; background: var(--accent); color: white; padding: 6px 15px; border-radius: 20px; font-weight: 800; border: 4px solid white; font-size: 14px; }
 
         .user-info { text-align: center; padding: 20px 0; }
-        .user-info h1 { font-size: 30px; color: var(--primary); font-weight: 800; }
+        .user-info h1 { font-size: 30px; color: var(--primary); font-weight: 800; text-transform: uppercase; }
         .user-info p { color: var(--secondary); font-weight: 600; font-size: 16px; margin-top: 5px; }
 
-        /* Buttons */
+        /* Action Buttons */
         .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 25px 25px; }
-        .btn { padding: 15px; border-radius: 18px; text-decoration: none; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; font-size: 14px; }
+        .btn { padding: 15px; border-radius: 18px; text-decoration: none; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; font-size: 14px; border: none; cursor: pointer; }
         .btn-blue { background: var(--secondary); color: white; }
         .btn-gray { background: #f1f5f9; color: var(--primary); }
 
-        /* Grid Section */
+        /* Sections */
         .section { padding: 0 25px 30px; }
         .label { font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         .label::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
@@ -37,26 +37,29 @@
         .social-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
         .icon-box { text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px; }
         .icon-box i { width: 60px; height: 60px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 26px; color: white; transition: 0.3s; }
-        .icon-box:hover i { transform: translateY(-5px); filter: brightness(1.1); }
+        .icon-box:hover i { transform: translateY(-5px); }
         .icon-box span { font-size: 11px; color: #64748b; font-weight: 600; }
 
         /* Icon Colors */
-        .bg-wa { background: #25D366; } .bg-fb { background: #1877F2; } .bg-li { background: #0077B5; } .bg-ig { background: #E4405F; }
-        .bg-tg { background: #26A5E4; } .bg-vb { background: #7360f2; } .bg-yt { background: #FF0000; } .bg-tk { background: #000000; }
-        .bg-x  { background: #000000; } .bg-th { background: #000000; } .bg-hp { background: #ff5722; } .bg-cv { background: #2ecc71; }
+        .bg-wa { background: #25D366; } .bg-fb { background: #1877F2; } .bg-li { background: #0077B5; } 
+        .bg-ig { background: linear-gradient(45deg, #f09433, #bc1888); } .bg-tg { background: #26A5E4; } 
+        .bg-vb { background: #7360f2; } .bg-imo { background: #2a9df4; } .bg-yt { background: #FF0000; } 
+        .bg-tk { background: #000000; } .bg-x { background: #000000; } .bg-th { background: #000000; } 
+        .bg-hp { background: #ff5722; } .bg-cv { background: #2ecc71; }
 
-        /* Contact & Address Cards */
-        .info-card { background: #f8fafc; padding: 18px; border-radius: 22px; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; border: 1px solid #e2e8f0; }
-        .info-card i { font-size: 20px; color: var(--secondary); }
+        /* Clickable Cards */
+        .clickable-card { text-decoration: none; display: block; background: #f8fafc; padding: 18px; border-radius: 22px; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; border: 1px solid #e2e8f0; transition: 0.2s; }
+        .clickable-card:hover { background: #f1f5f9; border-color: var(--secondary); }
+        .clickable-card i { font-size: 20px; color: var(--secondary); }
         .info-text strong { display: block; font-size: 11px; color: #94a3b8; text-transform: uppercase; margin-bottom: 2px; }
         .info-text p { font-size: 14px; color: var(--primary); font-weight: 600; line-height: 1.4; }
 
-        /* Payment Box */
+        /* Payment */
         .payment { background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%); padding: 25px; border-radius: 25px; border: 2px dashed #cbd5e1; text-align: center; }
         .payment h4 { font-size: 12px; color: #64748b; margin-bottom: 10px; text-transform: uppercase; }
         .pay-num { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: 1px; }
 
-        .footer { text-align: center; padding: 40px; color: #cbd5e1; font-size: 11px; font-weight: 600; letter-spacing: 1px; }
+        .footer { text-align: center; padding: 40px; color: #cbd5e1; font-size: 11px; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -88,6 +91,7 @@
             <a href="https://instagram.com/mdprince3302" class="icon-box"><i class="fab fa-instagram bg-ig"></i><span>Instagram</span></a>
             <a href="https://t.me/mdprince3302" class="icon-box"><i class="fab fa-telegram-plane bg-tg"></i><span>Telegram</span></a>
             <a href="viber://chat?number=8801326573302" class="icon-box"><i class="fab fa-viber bg-vb"></i><span>Viber</span></a>
+            <a href="tel:+8801326573302" class="icon-box"><i class="fas fa-comment-dots bg-imo"></i><span>IMO</span></a>
             <a href="https://youtube.com/@mdprince302" class="icon-box"><i class="fab fa-youtube bg-yt"></i><span>YouTube</span></a>
             <a href="https://tiktok.com/@mdprince73302" class="icon-box"><i class="fab fa-tiktok bg-tk"></i><span>TikTok</span></a>
             <a href="https://x.com/mdprince3302" class="icon-box"><i class="fa-brands fa-x-twitter bg-x"></i><span>Twitter</span></a>
@@ -96,15 +100,15 @@
             <a href="https://drive.google.com/file/d/16j6xsn6o6O9KI-nzsN-riNscbZPNssEr/view" class="icon-box"><i class="fas fa-file-pdf bg-cv"></i><span>Resume</span></a>
         </div>
 
-        <div class="label">Contact & Emails</div>
-        <div class="info-card">
+        <div class="label">Email Addresses (Click to Mail)</div>
+        <a href="mailto:mdprince3302@gmail.com" class="clickable-card">
             <i class="fas fa-envelope"></i>
-            <div class="info-text"><strong>Primary Email</strong><p>mdprince3302@gmail.com</p></div>
-        </div>
-        <div class="info-card">
+            <div class="info-text"><strong>Primary Gmail</strong><p>mdprince3302@gmail.com</p></div>
+        </a>
+        <a href="mailto:contact@prince.bro.bd" class="clickable-card">
             <i class="fas fa-at"></i>
             <div class="info-text"><strong>Secondary Email</strong><p>contact@prince.bro.bd</p></div>
-        </div>
+        </a>
 
         <div class="label">MFS Payment (Send Money)</div>
         <div class="payment">
@@ -113,25 +117,25 @@
         </div>
 
         <div class="label">Location Details</div>
-        <div class="info-card">
+        <div class="clickable-card">
             <i class="fas fa-location-dot"></i>
             <div class="info-text"><strong>Present Address</strong><p>Model Town, Keraniganj, Dhaka, Bangladesh</p></div>
         </div>
-        <div class="info-card">
+        <div class="clickable-card">
             <i class="fas fa-house-chimney"></i>
             <div class="info-text"><strong>Permanent Address</strong><p>Bahir Daspara, Daspara, Bauphal, Patuakhali, Bangladesh</p></div>
         </div>
     </div>
 
-    <div class="footer">DIGITAL CARD &copy; 2026 MD PRINCE</div>
+    <div class="footer">DIGITAL BUSINESS CARD &copy; 2026 MD PRINCE</div>
 </div>
 
 <script>
     function shareProfile() {
         if (navigator.share) {
-            navigator.share({ title: 'MD PRINCE | Card', url: window.location.href }).catch(console.error);
+            navigator.share({ title: 'MD PRINCE | Digital Card', url: window.location.href }).catch(console.error);
         } else {
-            alert("URL Copied!");
+            alert("URL Copied to Clipboard!");
         }
     }
 </script>
