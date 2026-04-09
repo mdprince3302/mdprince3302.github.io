@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD PRINCE | Digital Business Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* বেসিক স্টাইল (পরিবর্তন করার দরকার নেই) */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            /* প্রিমিয়াম সার্কিট ব্যাকগ্রাউন্ড */
+            background-color: #f4f7f9;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d3dce6' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95); max-width: 400px; width: 100%; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); padding: 40px 20px; text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px);
+        }
+        .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 15px; }
+        .name { font-size: 24px; color: #2c3e50; font-weight: 700; margin-bottom: 5px; letter-spacing: 1px; }
+        .bio { font-size: 13px; color: #5a6c7d; margin-bottom: 30px; line-height: 1.5; }
+        .divider { height: 1px; background: #e1e4e8; margin-bottom: 25px; }
+
+        /* বাটনগুলোর স্টাইল (সহজে পরিবর্তন করার জন্য) */
+        .btn-list { display: flex; flex-direction: column; gap: 12px; }
+        .btn {
+            display: flex; align-items: center; justify-content: flex-start; gap: 12px;
+            text-decoration: none; padding: 15px; border-radius: 12px; color: white;
+            font-size: 14px; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+        .btn i { font-size: 20px; width: 25px; text-align: center; }
+
+        /* প্রতিটি অ্যাপের কালার (এগুলো পরিবর্তন করার দরকার নেই) */
+        .whatsapp { background: #25D366; }
+        .linkedin { background: #0077B5; }
+        .facebook { background: #1877F2; }
+        .instagram { background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%); }
+        .tiktok { background: #000000; }
+        .email { background: #ea4335; }
+        .phone { background: #34B7F1; }
+        .youtube { background: #FF0000; }
+
+        .footer-text { font-size: 11px; color: #9aa0a6; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="https://i.ibb.co/3Wb0Xw6/default-avatar.png" alt="MD PRINCE" class="profile-img">
+        <h1 class="name">MD PRINCE</h1>
+        <p class="bio">Diploma in Electronics Engineering<br>Patuakhali Polytechnic Institute</p>
+        <div class="divider"></div>
+
+        <div class="btn-list">
+
+            <a href="https://wa.me/8801721675237" target="_blank" class="btn whatsapp">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+
+            <a href="তোমার-লিঙ্কডইন-লিঙ্ক" target="_blank" class="btn linkedin">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+
+            <a href="তোমার-ফেসবুক-লিঙ্ক" target="_blank" class="btn facebook">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+
+            <a href="তোমার-ইন্সটাগ্রাম-লিঙ্ক" target="_blank" class="btn instagram">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+
+            <a href="তোমার-টিকটক-লিঙ্ক" target="_blank" class="btn tiktok">
+                <i class="fab fa-tiktok"></i> TikTok
+            </a>
+
+            <a href="mailto:contact@prince.bro.bd" class="btn email">
+                <i class="fas fa-envelope"></i> contact@prince.bro.bd
+            </a>
+
+            <a href="tel:+8801721675237" class="btn phone">
+                <i class="fas fa-phone-alt"></i> Call Me Directly
+            </a>
+
+            </div>
+
+        <p class="footer-text">© 2026 MD PRINCE. All rights reserved.</p>
+    </div>
+
+</body>
+</html>
