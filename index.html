@@ -7,118 +7,134 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root {
-            --primary: #0f172a;
-            --secondary: #3b82f6;
-            --accent: #ef4444;
-            --bg: #f1f5f9;
-            --card-bg: #ffffff;
-        }
+        :root { --primary: #0f172a; --secondary: #3b82f6; --accent: #ef4444; --bg: #f1f5f9; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
-        body { background: var(--bg); display: flex; justify-content: center; min-height: 100vh; padding: 10px; }
+        body { background: var(--bg); display: flex; justify-content: center; min-height: 100vh; padding: 15px; }
         
-        .main-card {
-            width: 100%; max-width: 480px; background: var(--card-bg); border-radius: 35px;
-            overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); position: relative;
-        }
+        .main-card { width: 100%; max-width: 480px; background: #fff; border-radius: 40px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.1); }
 
-        /* Profile Header */
-        .header-top { height: 180px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); position: relative; }
-        .profile-container { text-align: center; margin-top: -90px; padding: 0 20px; position: relative; z-index: 2; }
-        .profile-img { 
-            width: 160px; height: 160px; border-radius: 50%; border: 7px solid white;
-            object-fit: cover; box-shadow: 0 10px 25px rgba(0,0,0,0.15); background: #eee;
-        }
-        .blood-badge {
-            position: absolute; top: 120px; right: 32%; background: var(--accent);
-            color: white; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700;
-            border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
+        /* Header Section */
+        .header { height: 200px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); position: relative; }
+        .profile-wrapper { text-align: center; margin-top: -100px; position: relative; z-index: 5; }
+        .profile-img { width: 170px; height: 170px; border-radius: 50%; border: 8px solid white; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .blood-badge { position: absolute; bottom: 15px; right: 33%; background: var(--accent); color: white; padding: 6px 15px; border-radius: 20px; font-weight: 800; border: 4px solid white; font-size: 14px; }
 
-        .user-meta { margin-top: 15px; }
-        .user-meta h1 { font-size: 28px; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-        .user-meta p { font-size: 16px; color: var(--secondary); font-weight: 600; margin-bottom: 5px; }
+        .user-info { text-align: center; padding: 20px 0; }
+        .user-info h1 { font-size: 30px; color: var(--primary); font-weight: 800; }
+        .user-info p { color: var(--secondary); font-weight: 600; font-size: 16px; margin-top: 5px; }
 
-        /* Quick Action Buttons */
-        .action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 25px 20px; }
-        .btn-main {
-            padding: 14px; border-radius: 16px; text-decoration: none; font-weight: 700;
-            font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px;
-            transition: 0.3s;
-        }
-        .btn-call { background: var(--secondary); color: white; }
-        .btn-save { background: #e2e8f0; color: var(--primary); }
-        .btn-main:hover { transform: translateY(-3px); opacity: 0.9; }
+        /* Buttons */
+        .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 25px 25px; }
+        .btn { padding: 15px; border-radius: 18px; text-decoration: none; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; font-size: 14px; }
+        .btn-blue { background: var(--secondary); color: white; }
+        .btn-gray { background: #f1f5f9; color: var(--primary); }
 
-        /* Links Grid */
-        .content-section { padding: 0 20px 30px; }
-        .section-label { 
-            font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; 
-            letter-spacing: 2px; margin: 25px 0 15px; display: flex; align-items: center; gap: 10px;
-        }
-        .section-label::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
-        
+        /* Grid Section */
+        .section { padding: 0 25px 30px; }
+        .label { font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .label::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
+
         .social-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
-        .social-item { text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-        .social-item i { 
-            width: 55px; height: 55px; border-radius: 18px; display: flex; 
-            align-items: center; justify-content: center; font-size: 24px; color: white;
-            transition: 0.3s; box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-        }
-        .social-item:hover i { transform: scale(1.1); box-shadow: 0 12px 20px rgba(0,0,0,0.15); }
-        .social-item span { font-size: 11px; color: #475569; font-weight: 600; }
+        .icon-box { text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .icon-box i { width: 60px; height: 60px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 26px; color: white; transition: 0.3s; }
+        .icon-box:hover i { transform: translateY(-5px); filter: brightness(1.1); }
+        .icon-box span { font-size: 11px; color: #64748b; font-weight: 600; }
 
-        /* Brand Colors */
-        .bg-fb { background: #1877F2; } .bg-li { background: #0077B5; } .bg-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-        .bg-yt { background: #FF0000; } .bg-wa { background: #25D366; } .bg-tg { background: #26A5E4; }
-        .bg-tk { background: #000000; } .bg-x { background: #000000; } .bg-th { background: #000000; }
-        .bg-vb { background: #7360f2; } .bg-hp { background: #ff5722; } .bg-cv { background: #2ecc71; }
+        /* Icon Colors */
+        .bg-wa { background: #25D366; } .bg-fb { background: #1877F2; } .bg-li { background: #0077B5; } .bg-ig { background: #E4405F; }
+        .bg-tg { background: #26A5E4; } .bg-vb { background: #7360f2; } .bg-yt { background: #FF0000; } .bg-tk { background: #000000; }
+        .bg-x  { background: #000000; } .bg-th { background: #000000; } .bg-hp { background: #ff5722; } .bg-cv { background: #2ecc71; }
 
-        /* Info Cards */
-        .detail-card { 
-            background: #f8fafc; padding: 18px; border-radius: 20px; margin-bottom: 12px; 
-            display: flex; align-items: center; gap: 15px; border: 1px solid #e2e8f0;
-        }
-        .detail-card i { font-size: 20px; color: var(--secondary); width: 25px; text-align: center; }
-        .detail-text strong { display: block; font-size: 11px; color: #64748b; text-transform: uppercase; margin-bottom: 2px; }
-        .detail-text p { font-size: 14px; color: var(--primary); line-height: 1.4; font-weight: 500; }
+        /* Contact & Address Cards */
+        .info-card { background: #f8fafc; padding: 18px; border-radius: 22px; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; border: 1px solid #e2e8f0; }
+        .info-card i { font-size: 20px; color: var(--secondary); }
+        .info-text strong { display: block; font-size: 11px; color: #94a3b8; text-transform: uppercase; margin-bottom: 2px; }
+        .info-text p { font-size: 14px; color: var(--primary); font-weight: 600; line-height: 1.4; }
 
-        /* Payment Section */
-        .payment-box {
-            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-            padding: 20px; border-radius: 20px; border: 2px dashed #cbd5e1; text-align: center;
-        }
-        .payment-box strong { color: #64748b; font-size: 12px; display: block; margin-bottom: 8px; }
-        .pay-number { font-size: 20px; font-weight: 800; color: var(--primary); letter-spacing: 1px; }
+        /* Payment Box */
+        .payment { background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%); padding: 25px; border-radius: 25px; border: 2px dashed #cbd5e1; text-align: center; }
+        .payment h4 { font-size: 12px; color: #64748b; margin-bottom: 10px; text-transform: uppercase; }
+        .pay-num { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: 1px; }
 
-        .footer { text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 12px; font-weight: 500; }
+        .footer { text-align: center; padding: 40px; color: #cbd5e1; font-size: 11px; font-weight: 600; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
 <div class="main-card">
-    <div class="header-top"></div>
+    <div class="header"></div>
     
-    <div class="profile-container">
-        <img src="IMG_20260409_150753.jpg" alt="MD PRINCE" class="profile-img" loading="eager">
+    <div class="profile-wrapper">
+        <img src="IMG_20260409_150753.jpg" alt="MD PRINCE" class="profile-img">
         <div class="blood-badge">B+</div>
-        <div class="user-meta">
-            <h1>MD PRINCE</h1>
-            <p>Diploma Engineer (Electronics)</p>
+    </div>
+
+    <div class="user-info">
+        <h1>MD PRINCE</h1>
+        <p>Diploma Engineer (Electronics)</p>
+    </div>
+
+    <div class="btn-group">
+        <a href="tel:+8801326573302" class="btn btn-blue"><i class="fas fa-phone"></i> Call Now</a>
+        <button onclick="shareProfile()" class="btn btn-gray"><i class="fas fa-share-nodes"></i> Share Card</button>
+    </div>
+
+    <div class="section">
+        <div class="label">Connect & Social</div>
+        <div class="social-grid">
+            <a href="https://wa.me/8801326573302" class="icon-box"><i class="fab fa-whatsapp bg-wa"></i><span>WhatsApp</span></a>
+            <a href="https://www.facebook.com/mdprince3302" class="icon-box"><i class="fab fa-facebook-f bg-fb"></i><span>Facebook</span></a>
+            <a href="https://www.linkedin.com/in/mdprince3302" class="icon-box"><i class="fab fa-linkedin-in bg-li"></i><span>LinkedIn</span></a>
+            <a href="https://instagram.com/mdprince3302" class="icon-box"><i class="fab fa-instagram bg-ig"></i><span>Instagram</span></a>
+            <a href="https://t.me/mdprince3302" class="icon-box"><i class="fab fa-telegram-plane bg-tg"></i><span>Telegram</span></a>
+            <a href="viber://chat?number=8801326573302" class="icon-box"><i class="fab fa-viber bg-vb"></i><span>Viber</span></a>
+            <a href="https://youtube.com/@mdprince302" class="icon-box"><i class="fab fa-youtube bg-yt"></i><span>YouTube</span></a>
+            <a href="https://tiktok.com/@mdprince73302" class="icon-box"><i class="fab fa-tiktok bg-tk"></i><span>TikTok</span></a>
+            <a href="https://x.com/mdprince3302" class="icon-box"><i class="fa-brands fa-x-twitter bg-x"></i><span>Twitter</span></a>
+            <a href="https://www.threads.net/@mdprince3302" class="icon-box"><i class="fa-brands fa-threads bg-th"></i><span>Threads</span></a>
+            <a href="https://hopenity.com/user/mdprince3302" class="icon-box"><i class="fas fa-link bg-hp"></i><span>Hopenity</span></a>
+            <a href="https://drive.google.com/file/d/16j6xsn6o6O9KI-nzsN-riNscbZPNssEr/view" class="icon-box"><i class="fas fa-file-pdf bg-cv"></i><span>Resume</span></a>
+        </div>
+
+        <div class="label">Contact & Emails</div>
+        <div class="info-card">
+            <i class="fas fa-envelope"></i>
+            <div class="info-text"><strong>Primary Email</strong><p>mdprince3302@gmail.com</p></div>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-at"></i>
+            <div class="info-text"><strong>Secondary Email</strong><p>contact@prince.bro.bd</p></div>
+        </div>
+
+        <div class="label">MFS Payment (Send Money)</div>
+        <div class="payment">
+            <h4>Bkash | Nagad | Rocket</h4>
+            <div class="pay-num">01326573302</div>
+        </div>
+
+        <div class="label">Location Details</div>
+        <div class="info-card">
+            <i class="fas fa-location-dot"></i>
+            <div class="info-text"><strong>Present Address</strong><p>Model Town, Keraniganj, Dhaka, Bangladesh</p></div>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-house-chimney"></i>
+            <div class="info-text"><strong>Permanent Address</strong><p>Bahir Daspara, Daspara, Bauphal, Patuakhali, Bangladesh</p></div>
         </div>
     </div>
 
-    <div class="action-row">
-        <a href="tel:+8801326573302" class="btn-main btn-call"><i class="fas fa-phone"></i> Call Now</a>
-        <button onclick="shareProfile()" class="btn-main btn-save"><i class="fas fa-share-nodes"></i> Share Card</button>
-    </div>
+    <div class="footer">DIGITAL CARD &copy; 2026 MD PRINCE</div>
+</div>
 
-    <div class="content-section">
-        <div class="section-label">Connect & Social</div>
-        <div class="social-grid">
-            <a href="https://wa.me/8801326573302" class="social-item"><i class="fab fa-whatsapp bg-wa"></i><span>WhatsApp</span></a>
-            <a href="https://www.facebook.com/mdprince3302" class="social-item"><i class="fab fa-facebook-f bg-fb"></i><span>Facebook</span></a>
-            <a href="https://www.linkedin.com/in/mdprince3302" class="social-item"><i class="fab fa-linkedin-in bg-li"></i><span>LinkedIn</span></a>
-            <a href="https://instagram.com/mdprince3302" class="social-item"><i class="fab fa-instagram bg-ig"></i><span>Instagram</span></a>
-            <a href="https://t.me/mdprince3302" class="social-item"><i class="fab fa-telegram-plane bg-tg"></i><span>Telegram</span></a>
-            <a href="viber://chat?number=8801326573302" class="social-item"><i class="fab fa-viber bg-vb
+<script>
+    function shareProfile() {
+        if (navigator.share) {
+            navigator.share({ title: 'MD PRINCE | Card', url: window.location.href }).catch(console.error);
+        } else {
+            alert("URL Copied!");
+        }
+    }
+</script>
+
+</body>
+</html>
