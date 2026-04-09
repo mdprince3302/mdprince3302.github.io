@@ -33,7 +33,6 @@
 
         .section { padding: 0 30px 30px; }
         
-        /* হেডার লেখাগুলো বোল্ড এবং আকর্ষণীয় করা হয়েছে */
         .label { font-size: 13px; font-weight: 900; color: #334155; text-transform: uppercase; letter-spacing: 2px; margin: 35px 0 15px; display: flex; align-items: center; gap: 10px; }
         .label::after { content: ""; flex: 1; height: 2px; background: #e2e8f0; }
 
@@ -57,13 +56,18 @@
 
         .resume-btn { display: flex; align-items: center; justify-content: center; gap: 12px; text-decoration: none; background: var(--resume); color: white; padding: 20px; border-radius: 25px; font-weight: 700; font-size: 16px; margin-top: 10px; box-shadow: 0 10px 25px rgba(22, 163, 74, 0.15); }
 
-        /* MFS সেকশন - নতুন প্রিমিয়াম স্টাইল */
-        .payment-box { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 25px; border-radius: 25px; border: 1px solid #e2e8f0; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.04); }
-        .mfs-tags { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
-        .mfs-tag { font-size: 11px; font-weight: 800; color: white; padding: 6px 15px; border-radius: 8px; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
-        .pay-num-row { display: flex; align-items: center; justify-content: center; gap: 15px; }
-        .pay-num { font-size: 28px; font-weight: 900; color: var(--primary); letter-spacing: 2px; }
-        .copy-btn { background: #fff; border: 2px solid #cbd5e1; padding: 8px 18px; border-radius: 12px; font-size: 14px; color: var(--primary); font-weight: 800; display: flex; align-items: center; gap: 6px; }
+        /* MFS সেকশন - একদম নতুন স্মার্ট ওয়ালেট ডিজাইন */
+        .wallet-card { background: #fff; border-radius: 20px; padding: 25px 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; position: relative; overflow: hidden; }
+        .wallet-card::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: linear-gradient(to bottom, var(--bkash), var(--nagad), var(--rocket)); }
+        
+        .wallet-brands { display: flex; gap: 15px; margin-bottom: 15px; font-size: 14px; font-weight: 800; justify-content: center; text-transform: uppercase; letter-spacing: 1px; }
+        .brand-b { color: var(--bkash); }
+        .brand-n { color: var(--nagad); }
+        .brand-r { color: var(--rocket); }
+
+        .wallet-num-container { display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 15px 20px; border-radius: 15px; border: 1px solid #e2e8f0; }
+        .wallet-num-container .number { font-size: 24px; font-weight: 900; color: var(--primary); letter-spacing: 1.5px; }
+        .wallet-copy { background: var(--primary); color: white; border: none; padding: 10px 18px; border-radius: 12px; font-weight: 700; font-size: 13px; display: flex; align-items: center; gap: 6px; }
 
         .visitor-section { text-align: center; padding: 20px; border-top: 1px solid #f1f5f9; }
         .footer { text-align: center; padding: 20px 20px 40px; color: #cbd5e1; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; }
@@ -77,8 +81,8 @@
             .user-info p { font-size: 16px; }
             .section { padding: 0 20px 20px; }
             .clickable-card { padding: 15px; }
-            .pay-num { font-size: 24px; letter-spacing: 1px; }
-            .mfs-tag { padding: 5px 10px; font-size: 10px; }
+            .wallet-num-container { padding: 15px; flex-direction: column; gap: 15px; }
+            .wallet-copy { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -123,27 +127,28 @@
             <a href="https://hopenity.com/user/mdprince3302" class="icon-box clickable"><i class="fas fa-link bg-hp"></i><span>Hopenity</span></a>
         </div>
 
-        <div class="label" style="margin-top: 35px;">Resume & Professional</div>
-        <a href="https://drive.google.com/file/d/16j6xsn6o6O9KI-nzsN-riNscbZPNssEr/view" class="resume-btn clickable">
-            <i class="fas fa-file-pdf"></i> Download Resume (CV)
+        <div class="label" style="margin-top: 35px;">Resume / CV</div>
+        <a href="https://drive.google.com/file/d/16j6xsn6o6O9KI-nzsN-riNscbZPNssEr/view" class="resume-btn clickable" style="margin-top: 0;">
+            <i class="fas fa-file-pdf"></i> Download Resume
         </a>
         
-        <a href="mailto:contact@prince.bro.bd" class="clickable-card clickable" style="margin-top: 15px;">
+        <div class="label" style="margin-top: 35px;">Professional Contact</div>
+        <a href="mailto:contact@prince.bro.bd" class="clickable-card clickable" style="margin-top: 0;">
             <i class="fas fa-at"></i>
             <div class="info-text"><strong>Professional Email</strong><p>contact@prince.bro.bd</p></div>
             <i class="fas fa-arrow-right email-action"></i>
         </a>
 
         <div class="label" style="margin-top: 35px;">MFS Payment (Send Money)</div>
-        <div class="payment-box">
-            <div class="mfs-tags">
-                <span class="mfs-tag" style="background: var(--bkash);">bKash</span>
-                <span class="mfs-tag" style="background: var(--nagad);">Nagad</span>
-                <span class="mfs-tag" style="background: var(--rocket);">Rocket</span>
+        <div class="wallet-card">
+            <div class="wallet-brands">
+                <span class="brand-b">bKash</span> • 
+                <span class="brand-n">Nagad</span> • 
+                <span class="brand-r">Rocket</span>
             </div>
-            <div class="pay-num-row">
-                <span class="pay-num" id="mfsNumber">01326573302</span>
-                <button onclick="copyNumber()" class="copy-btn clickable" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
+            <div class="wallet-num-container">
+                <span class="number" id="mfsNumber">01326573302</span>
+                <button onclick="copyNumber()" class="wallet-copy clickable" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
             </div>
         </div>
 
@@ -169,8 +174,12 @@
         const num = document.getElementById('mfsNumber').innerText;
         navigator.clipboard.writeText(num).then(() => {
             const btn = document.getElementById('copyBtn');
-            btn.innerHTML = '<i class="fas fa-check" style="color:#16a34a;"></i> Copied!';
-            setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; }, 2000);
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            btn.style.background = '#16a34a';
+            setTimeout(() => { 
+                btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; 
+                btn.style.background = 'var(--primary)';
+            }, 2000);
         });
     }
 
