@@ -5,25 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MD PRINCE | Digital Business Card</title>
     <link rel="icon" type="image/jpeg" href="IMG_20260409_232831.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root { --primary: #0f172a; --secondary: #3b82f6; --accent: #ef4444; --bg: #f8fafc; --resume: #16a34a; }
+        :root { --primary: #0f172a; --secondary: #3b82f6; --accent: #ef4444; --bg: #f8fafc; --resume: #16a34a; --bkash: #e2136e; --nagad: #f15a22; --rocket: #8c3494; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
         body { background: var(--bg); display: flex; justify-content: center; min-height: 100vh; padding: 20px 10px; }
         .main-card { width: 100%; max-width: 500px; background: #fff; border-radius: 40px; border: 1px solid #e2e8f0; box-shadow: 0 15px 40px rgba(0,0,0,0.08); overflow: hidden; position: relative; }
         
         .header { height: 260px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 0 0 50px 50px; }
         
-        /* ছবি আগের চেয়ে ২৫% বড় করা হয়েছে */
         .profile-wrapper { text-align: center; margin-top: -240px; position: relative; z-index: 5; }
         .profile-img { width: 300px; height: 300px; border-radius: 50%; border: 15px solid white; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
         .blood-badge { position: absolute; bottom: 50px; right: 24%; background: var(--accent); color: white; padding: 9px 25px; border-radius: 20px; font-weight: 800; border: 6px solid white; font-size: 16px; }
         
         .user-info { text-align: center; padding: 20px 0 10px; }
-        .user-info h1 { font-size: 36px; color: var(--primary); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* বায়ো আগের মতো */
+        .user-info h1 { font-size: 36px; color: var(--primary); font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
         .user-info p { color: var(--secondary); font-weight: 600; font-size: 19px; margin-top: 5px; }
 
         .clickable { transition: 0.1s; cursor: pointer; }
@@ -35,16 +32,17 @@
         .btn-gray { background: #f1f5f9; color: var(--primary); border: 1px solid #e2e8f0; }
 
         .section { padding: 0 30px 30px; }
-        .label { font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 2.5px; margin: 30px 0 15px; display: flex; align-items: center; gap: 10px; }
-        .label::after { content: ""; flex: 1; height: 1px; background: #f1f5f9; }
+        
+        /* হেডার লেখাগুলো বোল্ড এবং আকর্ষণীয় করা হয়েছে */
+        .label { font-size: 13px; font-weight: 900; color: #334155; text-transform: uppercase; letter-spacing: 2px; margin: 35px 0 15px; display: flex; align-items: center; gap: 10px; }
+        .label::after { content: ""; flex: 1; height: 2px; background: #e2e8f0; }
 
         .clickable-card { text-decoration: none; display: flex; background: #fff; padding: 20px; border-radius: 25px; margin-bottom: 12px; align-items: center; gap: 15px; border: 1px solid #f1f5f9; position: relative; }
         .clickable-card i { font-size: 22px; color: var(--secondary); min-width: 30px; text-align: center; }
         .info-text { flex: 1; }
-        .info-text strong { display: block; font-size: 10px; color: #94a3b8; text-transform: uppercase; margin-bottom: 2px; }
-        .info-text p { font-size: 14px; color: var(--primary); font-weight: 600; line-height: 1.4; word-wrap: break-word; }
+        .info-text strong { display: block; font-size: 10px; color: #94a3b8; text-transform: uppercase; margin-bottom: 2px; font-weight: 800; }
+        .info-text p { font-size: 14px; color: var(--primary); font-weight: 600; line-height: 1.4; word-break: normal; word-wrap: break-word; }
         
-        /* ইমেইল এর নতুন ছিমছাম স্টাইল */
         .email-action { color: var(--secondary); font-size: 18px; margin-left: 10px; }
 
         .social-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
@@ -59,18 +57,17 @@
 
         .resume-btn { display: flex; align-items: center; justify-content: center; gap: 12px; text-decoration: none; background: var(--resume); color: white; padding: 20px; border-radius: 25px; font-weight: 700; font-size: 16px; margin-top: 10px; box-shadow: 0 10px 25px rgba(22, 163, 74, 0.15); }
 
-        /* MFS সেকশন - অ্যাপ আইকন সহ */
-        .payment-box { background: #f8fafc; padding: 25px; border-radius: 30px; border: 2px dashed #e2e8f0; text-align: center; }
-        .mfs-icons { display: flex; justify-content: center; gap: 15px; margin-bottom: 15px; }
-        .mfs-icons img { width: 35px; height: 35px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        /* MFS সেকশন - নতুন প্রিমিয়াম স্টাইল */
+        .payment-box { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 25px; border-radius: 25px; border: 1px solid #e2e8f0; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.04); }
+        .mfs-tags { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
+        .mfs-tag { font-size: 11px; font-weight: 800; color: white; padding: 6px 15px; border-radius: 8px; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
         .pay-num-row { display: flex; align-items: center; justify-content: center; gap: 15px; }
-        .pay-num { font-size: 26px; font-weight: 800; color: var(--primary); letter-spacing: 1px; }
-        .copy-btn { background: #fff; border: 1px solid #cbd5e1; padding: 8px 15px; border-radius: 12px; font-size: 13px; color: var(--secondary); font-weight: 700; display: flex; align-items: center; gap: 6px; }
+        .pay-num { font-size: 28px; font-weight: 900; color: var(--primary); letter-spacing: 2px; }
+        .copy-btn { background: #fff; border: 2px solid #cbd5e1; padding: 8px 18px; border-radius: 12px; font-size: 14px; color: var(--primary); font-weight: 800; display: flex; align-items: center; gap: 6px; }
 
         .visitor-section { text-align: center; padding: 20px; border-top: 1px solid #f1f5f9; }
         .footer { text-align: center; padding: 20px 20px 40px; color: #cbd5e1; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; }
 
-        /* বাবার ফোনের রেসপন্সিভ ফিক্স */
         @media (max-width: 450px) {
             .header { height: 180px; }
             .profile-wrapper { margin-top: -160px; }
@@ -80,8 +77,8 @@
             .user-info p { font-size: 16px; }
             .section { padding: 0 20px 20px; }
             .clickable-card { padding: 15px; }
-            .pay-num { font-size: 22px; }
-            .mfs-icons img { width: 30px; height: 30px; gap: 10px; }
+            .pay-num { font-size: 24px; letter-spacing: 1px; }
+            .mfs-tag { padding: 5px 10px; font-size: 10px; }
         }
     </style>
 </head>
@@ -120,9 +117,13 @@
             <a href="viber://add?number=8801326573302" class="icon-box clickable"><i class="fab fa-viber bg-vb"></i><span>Viber</span></a>
             <a href="https://profile.imo.im/profileshare/shr.AAAAAAAAAAAAAAAAAAAAAC31n_BbFkcCUOi6r4eQSWVUM31v9V9jR6hJsO4M0Fk9" class="icon-box clickable"><i class="fas fa-comment-dots bg-imo"></i><span>IMO</span></a>
             <a href="https://youtube.com/@mdprince302" class="icon-box clickable"><i class="fab fa-youtube bg-yt"></i><span>YouTube</span></a>
+            <a href="https://tiktok.com/@mdprince73302" class="icon-box clickable"><i class="fab fa-tiktok bg-tk"></i><span>TikTok</span></a>
+            <a href="https://x.com/mdprince3302" class="icon-box clickable"><i class="fa-brands fa-x-twitter bg-x"></i><span>Twitter</span></a>
+            <a href="https://www.threads.net/@mdprince3302" class="icon-box clickable"><i class="fa-brands fa-threads bg-th"></i><span>Threads</span></a>
+            <a href="https://hopenity.com/user/mdprince3302" class="icon-box clickable"><i class="fas fa-link bg-hp"></i><span>Hopenity</span></a>
         </div>
 
-        <div class="label" style="margin-top: 25px;">Resume & Professional</div>
+        <div class="label" style="margin-top: 35px;">Resume & Professional</div>
         <a href="https://drive.google.com/file/d/16j6xsn6o6O9KI-nzsN-riNscbZPNssEr/view" class="resume-btn clickable">
             <i class="fas fa-file-pdf"></i> Download Resume (CV)
         </a>
@@ -133,12 +134,12 @@
             <i class="fas fa-arrow-right email-action"></i>
         </a>
 
-        <div class="label">MFS Payment (Send Money)</div>
+        <div class="label" style="margin-top: 35px;">MFS Payment (Send Money)</div>
         <div class="payment-box">
-            <div class="mfs-icons">
-                <img src="https://logowik.com/content/uploads/images/bkash-mobile-banking-app-icon9077.jpg" alt="Bkash">
-                <img src="https://logowik.com/content/uploads/images/nagad-mobile-banking9044.jpg" alt="Nagad">
-                <img src="https://logowik.com/content/uploads/images/rocket-mobile-banking9390.jpg" alt="Rocket">
+            <div class="mfs-tags">
+                <span class="mfs-tag" style="background: var(--bkash);">bKash</span>
+                <span class="mfs-tag" style="background: var(--nagad);">Nagad</span>
+                <span class="mfs-tag" style="background: var(--rocket);">Rocket</span>
             </div>
             <div class="pay-num-row">
                 <span class="pay-num" id="mfsNumber">01326573302</span>
@@ -146,7 +147,7 @@
             </div>
         </div>
 
-        <div class="label">Location (Tap for Directions)</div>
+        <div class="label" style="margin-top: 35px;">Location Details</div>
         <a href="https://goo.gl/maps/G2fwZCiETiX6bCN27" target="_blank" class="clickable-card clickable">
             <i class="fas fa-location-dot"></i>
             <div class="info-text"><strong>Present Address</strong><p>Model Town, Keraniganj, Dhaka, Bangladesh</p></div>
@@ -164,7 +165,6 @@
 </div>
 
 <script>
-    // MFS Number Copy Logic
     function copyNumber() {
         const num = document.getElementById('mfsNumber').innerText;
         navigator.clipboard.writeText(num).then(() => {
@@ -174,7 +174,6 @@
         });
     }
 
-    // Share Profile Logic
     function shareProfile() {
         const shareData = { title: 'MD PRINCE | Card', url: 'https://prince.bro.bd' };
         if (navigator.share) {
