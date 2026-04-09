@@ -8,19 +8,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root { --primary: #0f172a; --secondary: #3b82f6; --accent: #ef4444; --bg: #f8fafc; --resume: #16a34a; --bkash: #e2136e; --nagad: #f15a22; --rocket: #8c3494; }
+        :root { --primary: #0f172a; --secondary: #3b82f6; --accent: #ef4444; --bg: #f8fafc; --resume: #16a34a; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
         body { background: var(--bg); display: flex; justify-content: center; min-height: 100vh; padding: 20px 10px; }
         .main-card { width: 100%; max-width: 500px; background: #fff; border-radius: 40px; border: 1px solid #e2e8f0; box-shadow: 0 15px 40px rgba(0,0,0,0.08); overflow: hidden; position: relative; }
         
         .header { height: 260px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 0 0 50px 50px; }
-        .profile-wrapper { text-align: center; margin-top: -210px; position: relative; z-index: 5; }
-        .profile-img { width: 240px; height: 240px; border-radius: 50%; border: 12px solid white; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
-        .blood-badge { position: absolute; bottom: 40px; right: 26%; background: var(--accent); color: white; padding: 7px 20px; border-radius: 20px; font-weight: 800; border: 5px solid white; font-size: 15px; }
+        
+        /* ছবি আগের চেয়ে ২৫% বড় করা হয়েছে */
+        .profile-wrapper { text-align: center; margin-top: -240px; position: relative; z-index: 5; }
+        .profile-img { width: 300px; height: 300px; border-radius: 50%; border: 15px solid white; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .blood-badge { position: absolute; bottom: 50px; right: 24%; background: var(--accent); color: white; padding: 9px 25px; border-radius: 20px; font-weight: 800; border: 6px solid white; font-size: 16px; }
         
         .user-info { text-align: center; padding: 20px 0 10px; }
-        .user-info h1 { font-size: 34px; color: var(--primary); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-        .bio-text { font-size: 14px; color: #64748b; font-weight: 500; margin: 8px 30px 15px; line-height: 1.5; }
+        .user-info h1 { font-size: 36px; color: var(--primary); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* বায়ো আগের মতো */
+        .user-info p { color: var(--secondary); font-weight: 600; font-size: 19px; margin-top: 5px; }
 
         .clickable { transition: 0.1s; cursor: pointer; }
         .clickable:active { transform: scale(0.96); }
@@ -39,9 +43,11 @@
         .info-text { flex: 1; }
         .info-text strong { display: block; font-size: 10px; color: #94a3b8; text-transform: uppercase; margin-bottom: 2px; }
         .info-text p { font-size: 14px; color: var(--primary); font-weight: 600; line-height: 1.4; word-wrap: break-word; }
-        .cta-badge { background: var(--secondary); color: white; font-size: 10px; font-weight: 700; padding: 5px 10px; border-radius: 10px; text-transform: uppercase; }
+        
+        /* ইমেইল এর নতুন ছিমছাম স্টাইল */
+        .email-action { color: var(--secondary); font-size: 18px; margin-left: 10px; }
 
-        .social-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
+        .social-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
         .icon-box { text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px; }
         .icon-box i { width: 65px; height: 65px; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 28px; color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.06); }
         .icon-box span { font-size: 11px; color: #64748b; font-weight: 600; }
@@ -51,14 +57,12 @@
         .bg-tk { background: #000000; } .bg-x { background: #000000; } .bg-th { background: #000000; } 
         .bg-hp { background: #ff5722; }
 
-        /* Save Contact & Resume Button */
-        .vcard-btn { display: flex; align-items: center; justify-content: center; gap: 12px; border: none; background: var(--primary); color: white; padding: 20px; border-radius: 25px; font-weight: 700; font-size: 16px; width: 100%; margin-top: 10px; font-family: 'Outfit', sans-serif; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15); }
-        .resume-btn { display: flex; align-items: center; justify-content: center; gap: 12px; text-decoration: none; background: var(--resume); color: white; padding: 20px; border-radius: 25px; font-weight: 700; font-size: 16px; margin-top: 12px; box-shadow: 0 10px 25px rgba(22, 163, 74, 0.15); }
+        .resume-btn { display: flex; align-items: center; justify-content: center; gap: 12px; text-decoration: none; background: var(--resume); color: white; padding: 20px; border-radius: 25px; font-weight: 700; font-size: 16px; margin-top: 10px; box-shadow: 0 10px 25px rgba(22, 163, 74, 0.15); }
 
-        /* MFS সেকশন */
+        /* MFS সেকশন - অ্যাপ আইকন সহ */
         .payment-box { background: #f8fafc; padding: 25px; border-radius: 30px; border: 2px dashed #e2e8f0; text-align: center; }
-        .mfs-logos { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
-        .mfs-tag { font-size: 10px; font-weight: 700; color: white; padding: 4px 10px; border-radius: 6px; }
+        .mfs-icons { display: flex; justify-content: center; gap: 15px; margin-bottom: 15px; }
+        .mfs-icons img { width: 35px; height: 35px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .pay-num-row { display: flex; align-items: center; justify-content: center; gap: 15px; }
         .pay-num { font-size: 26px; font-weight: 800; color: var(--primary); letter-spacing: 1px; }
         .copy-btn { background: #fff; border: 1px solid #cbd5e1; padding: 8px 15px; border-radius: 12px; font-size: 13px; color: var(--secondary); font-weight: 700; display: flex; align-items: center; gap: 6px; }
@@ -66,17 +70,18 @@
         .visitor-section { text-align: center; padding: 20px; border-top: 1px solid #f1f5f9; }
         .footer { text-align: center; padding: 20px 20px 40px; color: #cbd5e1; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; }
 
+        /* বাবার ফোনের রেসপন্সিভ ফিক্স */
         @media (max-width: 450px) {
             .header { height: 180px; }
-            .profile-wrapper { margin-top: -140px; }
-            .profile-img { width: 170px; height: 170px; border-width: 8px; }
-            .blood-badge { bottom: 20px; right: 24%; padding: 5px 12px; font-size: 12px; }
-            .user-info h1 { font-size: 26px; }
-            .bio-text { font-size: 13px; margin: 8px 20px 15px; }
+            .profile-wrapper { margin-top: -160px; }
+            .profile-img { width: 200px; height: 200px; border-width: 10px; }
+            .blood-badge { bottom: 25px; right: 22%; padding: 6px 15px; font-size: 13px; border-width: 4px; }
+            .user-info h1 { font-size: 28px; }
+            .user-info p { font-size: 16px; }
             .section { padding: 0 20px 20px; }
             .clickable-card { padding: 15px; }
             .pay-num { font-size: 22px; }
-            .cta-badge { font-size: 9px; padding: 4px 8px; }
+            .mfs-icons img { width: 30px; height: 30px; gap: 10px; }
         }
     </style>
 </head>
@@ -89,7 +94,7 @@
     </div>
     <div class="user-info">
         <h1>MD PRINCE</h1>
-        <p class="bio-text">পটুয়াখালীর ছেলে, ঢাকার ব্যস্ততায়। সুযোগ পেলেই ব্যাগ গুছিয়ে বেরিয়ে পড়া আর আড্ডা জমানো আমার নেশা। হার মানা আমার ডিকশনারিতে নেই। 🎒✨</p>
+        <p>Diploma Engineer (Electronics)</p>
     </div>
     <div class="btn-group">
         <a href="tel:+8801326573302" class="btn btn-blue clickable"><i class="fas fa-phone"></i> Call Now</a>
@@ -100,7 +105,7 @@
         <a href="mailto:mdprince3302@gmail.com" class="clickable-card clickable" style="background: linear-gradient(135deg, #fdf2f2 0%, #fee2e2 100%); border-color: #fecaca;">
             <i class="fas fa-envelope" style="color: #dc2626;"></i>
             <div class="info-text"><strong>Personal Email</strong><p>mdprince3302@gmail.com</p></div>
-            <span class="cta-badge">Email Now</span>
+            <i class="fas fa-arrow-right email-action"></i>
         </a>
     </div>
 
@@ -115,33 +120,25 @@
             <a href="viber://add?number=8801326573302" class="icon-box clickable"><i class="fab fa-viber bg-vb"></i><span>Viber</span></a>
             <a href="https://profile.imo.im/profileshare/shr.AAAAAAAAAAAAAAAAAAAAAC31n_BbFkcCUOi6r4eQSWVUM31v9V9jR6hJsO4M0Fk9" class="icon-box clickable"><i class="fas fa-comment-dots bg-imo"></i><span>IMO</span></a>
             <a href="https://youtube.com/@mdprince302" class="icon-box clickable"><i class="fab fa-youtube bg-yt"></i><span>YouTube</span></a>
-            <a href="https://tiktok.com/@mdprince73302" class="icon-box clickable"><i class="fab fa-tiktok bg-tk"></i><span>TikTok</span></a>
-            <a href="https://x.com/mdprince3302" class="icon-box clickable"><i class="fa-brands fa-x-twitter bg-x"></i><span>Twitter</span></a>
-            <a href="https://www.threads.net/@mdprince3302" class="icon-box clickable"><i class="fa-brands fa-threads bg-th"></i><span>Threads</span></a>
-            <a href="https://hopenity.com/user/mdprince3302" class="icon-box clickable"><i class="fas fa-link bg-hp"></i><span>Hopenity</span></a>
         </div>
-
-        <button onclick="downloadVCard()" class="vcard-btn clickable">
-            <i class="fas fa-user-plus"></i> Save Contact
-        </button>
 
         <div class="label" style="margin-top: 25px;">Resume & Professional</div>
         <a href="https://drive.google.com/file/d/16j6xsn6o6O9KI-nzsN-riNscbZPNssEr/view" class="resume-btn clickable">
             <i class="fas fa-file-pdf"></i> Download Resume (CV)
         </a>
         
-        <a href="mailto:contact@prince.bro.bd" class="clickable-card clickable" style="margin-top: 12px;">
+        <a href="mailto:contact@prince.bro.bd" class="clickable-card clickable" style="margin-top: 15px;">
             <i class="fas fa-at"></i>
             <div class="info-text"><strong>Professional Email</strong><p>contact@prince.bro.bd</p></div>
-            <span class="cta-badge">Email Now</span>
+            <i class="fas fa-arrow-right email-action"></i>
         </a>
 
         <div class="label">MFS Payment (Send Money)</div>
         <div class="payment-box">
-            <div class="mfs-logos">
-                <span class="mfs-tag" style="background: var(--bkash);">Bkash</span>
-                <span class="mfs-tag" style="background: var(--nagad);">Nagad</span>
-                <span class="mfs-tag" style="background: var(--rocket);">Rocket</span>
+            <div class="mfs-icons">
+                <img src="https://logowik.com/content/uploads/images/bkash-mobile-banking-app-icon9077.jpg" alt="Bkash">
+                <img src="https://logowik.com/content/uploads/images/nagad-mobile-banking9044.jpg" alt="Nagad">
+                <img src="https://logowik.com/content/uploads/images/rocket-mobile-banking9390.jpg" alt="Rocket">
             </div>
             <div class="pay-num-row">
                 <span class="pay-num" id="mfsNumber">01326573302</span>
@@ -154,7 +151,7 @@
             <i class="fas fa-location-dot"></i>
             <div class="info-text"><strong>Present Address</strong><p>Model Town, Keraniganj, Dhaka, Bangladesh</p></div>
         </a>
-        <a href="https://maps.app.goo.gl/Cb6duxKcAzHZwW3o7" target="_blank" class="clickable-card clickable">
+        <a href="https://www.google.com/maps/search/?api=1&query=Bahir+Daspara,+Bauphal,+Patuakhali" target="_blank" class="clickable-card clickable">
             <i class="fas fa-house-chimney"></i>
             <div class="info-text"><strong>Permanent Address</strong><p>Bahir Daspara, Bauphal, Patuakhali, Bangladesh</p></div>
         </a>
@@ -186,21 +183,6 @@
             navigator.clipboard.writeText(shareData.url);
             alert("Custom Domain Link Copied!");
         }
-    }
-
-    // Save Contact (vCard) Logic
-    function downloadVCard() {
-        const vcardData = `BEGIN:VCARD\nVERSION:3.0\nFN:MD PRINCE\nTITLE:Diploma Engineer (Electronics)\nTEL;TYPE=CELL:+8801326573302\nEMAIL;TYPE=WORK:contact@prince.bro.bd\nEMAIL;TYPE=HOME:mdprince3302@gmail.com\nURL:https://prince.bro.bd\nEND:VCARD`;
-        
-        const blob = new Blob([vcardData], { type: 'text/vcard' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = url;
-        a.download = 'MD_PRINCE.vcf';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
     }
 </script>
 </body>
