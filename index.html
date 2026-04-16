@@ -8,17 +8,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root { --primary: #0f172a; --secondary: #3b82f6; --accent: #ef4444; --bg: #f8fafc; --resume: #16a34a; --bkash: #e2136e; --nagad: #f15a22; --rocket: #8c3494; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        /* কালার ভ্যারিয়েবল - লাইট মোড (ডিফল্ট) */
+        :root { 
+            --primary: #0f172a; --secondary: #3b82f6; --accent: #ef4444; --bg: #f8fafc; --resume: #16a34a; --bkash: #e2136e; --nagad: #f15a22; --rocket: #8c3494; 
+            --card-bg: #fff; --card-box: #fff; --inner-bg: #f8fafc; --border-color: #e2e8f0; --label-color: #334155; --copy-btn-text: #fff;
+        }
+        
+        /* কালার ভ্যারিয়েবল - ডার্ক মোড */
+        [data-theme="dark"] {
+            --primary: #f8fafc; --bg: #020617; --card-bg: #0f172a; --card-box: #1e293b; --inner-bg: #020617; --border-color: #334155; --label-color: #cbd5e1; --copy-btn-text: #020617;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background 0.3s, color 0.3s, border-color 0.3s; }
         body { background: var(--bg); display: flex; justify-content: center; min-height: 100vh; padding: 15px 10px; overflow-x: hidden; }
         
-        .main-card { width: 100%; max-width: 500px; background: #fff; border-radius: 40px; border: 1px solid #e2e8f0; box-shadow: 0 15px 40px rgba(0,0,0,0.08); overflow: hidden; position: relative; }
+        .main-card { width: 100%; max-width: 500px; background: var(--card-bg); border-radius: 40px; border: 1px solid var(--border-color); box-shadow: 0 15px 40px rgba(0,0,0,0.08); overflow: hidden; position: relative; }
         
-        .header { height: 240px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 0 0 50px 50px; }
+        .header { height: 240px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 0 0 50px 50px; position: relative; }
         
+        /* থিম চেঞ্জ বাটন */
+        .theme-toggle-btn { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.15); border: none; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; backdrop-filter: blur(5px); z-index: 10; transition: 0.2s; border: 1px solid rgba(255,255,255,0.2); }
+        .theme-toggle-btn:active { transform: scale(0.9); }
+
         .profile-wrapper { text-align: center; margin-top: -200px; position: relative; z-index: 5; }
-        .profile-img { width: 260px; height: 260px; border-radius: 50%; border: 12px solid white; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
-        .blood-badge { position: absolute; bottom: 45px; right: 24%; background: var(--accent); color: white; padding: 8px 20px; border-radius: 20px; font-weight: 800; border: 5px solid white; font-size: 15px; }
+        .profile-img { width: 260px; height: 260px; border-radius: 50%; border: 12px solid var(--card-bg); object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .blood-badge { position: absolute; bottom: 45px; right: 24%; background: var(--accent); color: white; padding: 8px 20px; border-radius: 20px; font-weight: 800; border: 5px solid var(--card-bg); font-size: 15px; }
         
         .user-info { text-align: center; padding: 20px 0 10px; }
         .user-info h1 { font-size: 34px; color: var(--primary); font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
@@ -30,14 +44,14 @@
         .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 30px 15px; }
         .btn { padding: 18px; border-radius: 22px; text-decoration: none; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 15px; border: none; }
         .btn-blue { background: var(--secondary); color: white; }
-        .btn-gray { background: #f1f5f9; color: var(--primary); border: 1px solid #e2e8f0; }
+        .btn-gray { background: var(--card-box); color: var(--primary); border: 1px solid var(--border-color); }
 
         .section { padding: 0 30px 30px; width: 100%; box-sizing: border-box; }
         
-        .label { font-size: 13px; font-weight: 900; color: #334155; text-transform: uppercase; letter-spacing: 2px; margin: 35px 0 15px; display: flex; align-items: center; gap: 10px; }
-        .label::after { content: ""; flex: 1; height: 2px; background: #e2e8f0; }
+        .label { font-size: 13px; font-weight: 900; color: var(--label-color); text-transform: uppercase; letter-spacing: 2px; margin: 35px 0 15px; display: flex; align-items: center; gap: 10px; }
+        .label::after { content: ""; flex: 1; height: 2px; background: var(--border-color); }
 
-        .clickable-card { text-decoration: none; display: flex; background: #fff; padding: 20px; border-radius: 25px; margin-bottom: 12px; align-items: center; gap: 15px; border: 1px solid #f1f5f9; position: relative; width: 100%; box-sizing: border-box; overflow: hidden; }
+        .clickable-card { text-decoration: none; display: flex; background: var(--card-box); padding: 20px; border-radius: 25px; margin-bottom: 12px; align-items: center; gap: 15px; border: 1px solid var(--border-color); position: relative; width: 100%; box-sizing: border-box; overflow: hidden; }
         .clickable-card i:first-child { font-size: 22px; color: var(--secondary); min-width: 30px; text-align: center; flex-shrink: 0; }
         .info-text { flex: 1; min-width: 0; }
         .info-text strong { display: block; font-size: 10px; color: #94a3b8; text-transform: uppercase; margin-bottom: 2px; font-weight: 800; }
@@ -58,7 +72,7 @@
 
         .resume-btn { display: flex; align-items: center; justify-content: center; gap: 12px; text-decoration: none; background: var(--resume); color: white; padding: 20px; border-radius: 25px; font-weight: 700; font-size: 16px; margin-top: 10px; box-shadow: 0 10px 25px rgba(22, 163, 74, 0.15); width: 100%; box-sizing: border-box; }
 
-        .wallet-card { background: #fff; border-radius: 18px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.04); border: 1px solid #f1f5f9; position: relative; overflow: hidden; width: 100%; box-sizing: border-box; }
+        .wallet-card { background: var(--card-box); border-radius: 18px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.04); border: 1px solid var(--border-color); position: relative; overflow: hidden; width: 100%; box-sizing: border-box; }
         .wallet-card::before { content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: linear-gradient(to bottom, var(--bkash), var(--nagad), var(--rocket)); }
         
         .wallet-brands { display: flex; gap: 12px; margin-bottom: 10px; font-size: 12px; font-weight: 800; justify-content: center; text-transform: uppercase; letter-spacing: 1px; flex-wrap: wrap; }
@@ -66,11 +80,11 @@
         .brand-n { color: var(--nagad); }
         .brand-r { color: var(--rocket); }
 
-        .wallet-num-container { display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 10px 15px; border-radius: 12px; border: 1px solid #e2e8f0; gap: 10px; flex-wrap: wrap; }
+        .wallet-num-container { display: flex; justify-content: space-between; align-items: center; background: var(--inner-bg); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color); gap: 10px; flex-wrap: wrap; }
         .wallet-num-container .number { font-size: 20px; font-weight: 900; color: var(--primary); letter-spacing: 1px; word-break: break-all; }
-        .wallet-copy { background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 8px; font-weight: 700; font-size: 12px; display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+        .wallet-copy { background: var(--primary); color: var(--copy-btn-text); border: none; padding: 8px 15px; border-radius: 8px; font-weight: 700; font-size: 12px; display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 
-        .visitor-section { text-align: center; padding: 20px; border-top: 1px solid #f1f5f9; }
+        .visitor-section { text-align: center; padding: 20px; border-top: 1px solid var(--border-color); }
         .footer { text-align: center; padding: 20px 20px 40px; color: #cbd5e1; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; }
 
         @media (max-width: 450px) {
@@ -94,7 +108,11 @@
 </head>
 <body>
 <div class="main-card">
-    <div class="header"></div>
+    <div class="header">
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+            <i class="fas fa-desktop"></i>
+        </button>
+    </div>
     <div class="profile-wrapper">
         <img src="IMG_20260409_232831.jpg" alt="MD PRINCE" class="profile-img">
         <div class="blood-badge">B+</div>
@@ -109,7 +127,7 @@
     </div>
 
     <div class="section" style="padding-bottom: 0;">
-        <a href="mailto:mdprince3302@gmail.com" class="clickable-card clickable" style="background: linear-gradient(135deg, #fdf2f2 0%, #fee2e2 100%); border-color: #fecaca;">
+        <a href="mailto:mdprince3302@gmail.com" class="clickable-card clickable" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%); border-color: rgba(239, 68, 68, 0.2);">
             <i class="fas fa-envelope" style="color: #dc2626;"></i>
             <div class="info-text"><strong>Personal Email</strong><p>mdprince3302@gmail.com</p></div>
             <i class="fas fa-arrow-right email-action"></i>
@@ -182,9 +200,11 @@
             const btn = document.getElementById('copyBtn');
             btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
             btn.style.background = '#16a34a';
+            btn.style.color = 'white';
             setTimeout(() => { 
                 btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; 
                 btn.style.background = 'var(--primary)';
+                btn.style.color = 'var(--copy-btn-text)';
             }, 2000);
         });
     }
@@ -198,6 +218,51 @@
             alert("Custom Domain Link Copied!");
         }
     }
+
+    // Theme Switcher Logic
+    const htmlEl = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    let currentMode = localStorage.getItem('themeMode') || 'system';
+
+    const icons = {
+        'system': 'fa-desktop',
+        'dark': 'fa-moon',
+        'light': 'fa-sun'
+    };
+
+    function applyTheme(mode) {
+        let isDark = false;
+        if (mode === 'system') {
+            isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        } else {
+            isDark = (mode === 'dark');
+        }
+
+        if (isDark) {
+            htmlEl.setAttribute('data-theme', 'dark');
+        } else {
+            htmlEl.removeAttribute('data-theme');
+        }
+        themeBtn.innerHTML = `<i class="fas ${icons[mode]}"></i>`;
+    }
+
+    // Handle Button Click
+    themeBtn.addEventListener('click', () => {
+        if (currentMode === 'system') currentMode = 'dark';
+        else if (currentMode === 'dark') currentMode = 'light';
+        else currentMode = 'system';
+        
+        localStorage.setItem('themeMode', currentMode);
+        applyTheme(currentMode);
+    });
+
+    // Initial Load
+    applyTheme(currentMode);
+
+    // Watch for OS theme changes if on 'system' mode
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (currentMode === 'system') applyTheme('system');
+    });
 </script>
 </body>
 </html>
