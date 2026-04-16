@@ -10,21 +10,46 @@
     <style>
         /* কালার ভ্যারিয়েবল - লাইট মোড (ডিফল্ট) */
         :root { 
-            --primary: #0f172a; --secondary: #3b82f6; --accent: #ef4444; --bg: #f8fafc; --resume: #16a34a; --bkash: #e2136e; --nagad: #f15a22; --rocket: #8c3494; 
+            --primary: #0f172a; --secondary: #3b82f6; --accent: #ef4444; --resume: #16a34a; --bkash: #e2136e; --nagad: #f15a22; --rocket: #8c3494; 
             --card-bg: #fff; --card-box: #fff; --inner-bg: #f8fafc; --border-color: #e2e8f0; --label-color: #334155; --copy-btn-text: #fff;
+            /* লাইভ ওয়ালপেপার কালার (লাইট) */
+            --live-bg: linear-gradient(-45deg, #e0f2fe, #f8fafc, #dbeafe, #e2e8f0);
+            --live-header: linear-gradient(-45deg, #1e293b, #3b82f6, #0f172a, #2563eb);
         }
         
         /* কালার ভ্যারিয়েবল - ডার্ক মোড */
         [data-theme="dark"] {
-            --primary: #f8fafc; --bg: #020617; --card-bg: #0f172a; --card-box: #1e293b; --inner-bg: #020617; --border-color: #334155; --label-color: #cbd5e1; --copy-btn-text: #020617;
+            --primary: #f8fafc; --card-bg: #0f172a; --card-box: #1e293b; --inner-bg: #020617; --border-color: #334155; --label-color: #cbd5e1; --copy-btn-text: #020617;
+            /* লাইভ ওয়ালপেপার কালার (ডার্ক) */
+            --live-bg: linear-gradient(-45deg, #020617, #0f172a, #1e293b, #020617);
+            --live-header: linear-gradient(-45deg, #020617, #1d4ed8, #0f172a, #1e40af);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background 0.3s, color 0.3s, border-color 0.3s; }
-        body { background: var(--bg); display: flex; justify-content: center; min-height: 100vh; padding: 15px 10px; overflow-x: hidden; }
+        /* লাইভ ওয়ালপেপার এনিমেশন */
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        
+        body { 
+            background: var(--live-bg); 
+            background-size: 400% 400%; 
+            animation: gradientMove 12s ease infinite; /* বডি লাইভ ওয়ালপেপার */
+            display: flex; justify-content: center; min-height: 100vh; padding: 15px 10px; overflow-x: hidden; 
+        }
         
         .main-card { width: 100%; max-width: 500px; background: var(--card-bg); border-radius: 40px; border: 1px solid var(--border-color); box-shadow: 0 15px 40px rgba(0,0,0,0.08); overflow: hidden; position: relative; z-index: 1; }
         
-        .header { height: 240px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 0 0 50px 50px; position: relative; }
+        .header { 
+            height: 240px; 
+            background: var(--live-header); 
+            background-size: 400% 400%; 
+            animation: gradientMove 10s ease infinite; /* হেডার লাইভ ওয়ালপেপার */
+            border-radius: 0 0 50px 50px; position: relative; 
+        }
         
         /* থিম চেঞ্জ বাটন */
         .theme-toggle-btn { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.15); border: none; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; backdrop-filter: blur(5px); z-index: 10; transition: 0.2s; border: 1px solid rgba(255,255,255,0.2); }
@@ -86,9 +111,6 @@
 
         .visitor-section { text-align: center; padding: 20px; border-top: 1px solid var(--border-color); }
         .footer { text-align: center; padding: 20px 20px 40px; color: #cbd5e1; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; }
-
-        /* এনিমেশন ওভারলে */
-        .theme-animation-overlay { position: fixed; inset: 0; background: var(--card-bg); z-index: 1000; pointer-events: none; }
 
         @media (max-width: 450px) {
             .header { height: 180px; }
@@ -222,26 +244,16 @@
         }
     }
 
-    // Theme Switcher Logic
+    // Theme Switcher Logic with Reveal Animation
     const htmlEl = document.documentElement;
     const themeBtn = document.getElementById('themeToggle');
     let currentMode = localStorage.getItem('themeMode') || 'system';
 
-    const icons = {
-        'system': 'fa-desktop',
-        'dark': 'fa-moon',
-        'light': 'fa-sun'
-    };
+    const icons = { 'system': 'fa-desktop', 'dark': 'fa-moon', 'light': 'fa-sun' };
 
     function applyTheme(mode, skipAnimation = false) {
-        let isDark = false;
-        if (mode === 'system') {
-            isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        } else {
-            isDark = (mode === 'dark');
-        }
+        let isDark = (mode === 'system') ? window.matchMedia('(prefers-color-scheme: dark)').matches : (mode === 'dark');
 
-        // বাটন লোডের সময় বা সিস্টেম চেঞ্জের সময় এনিমেশন হবে না
         if (skipAnimation) {
             if (isDark) htmlEl.setAttribute('data-theme', 'dark');
             else htmlEl.removeAttribute('data-theme');
@@ -249,44 +261,24 @@
             return;
         }
 
-        // বাটন টিপলে সুন্দর সার্কুলার এনিমেশন
         const rect = themeBtn.getBoundingClientRect();
         const x = rect.left + rect.width / 2;
         const y = rect.top + rect.height / 2;
         const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
 
-        // এনিমেশন শুরু হওয়ার আগে HTML-এ temporary data attribute
         htmlEl.setAttribute('data-theme-animating', isDark ? 'dark' : 'light');
 
         const animation = htmlEl.animate(
-            [
-                { clipPath: `circle(0px at ${x}px ${y}px)` },
-                { clipPath: `circle(${endRadius}px at ${x}px ${y}px)` }
-            ],
-            {
-                duration: 500,
-                easing: 'ease-out',
-                pseudoElement: '::after'
-            }
+            [ { clipPath: `circle(0px at ${x}px ${y}px)` }, { clipPath: `circle(${endRadius}px at ${x}px ${y}px)` } ],
+            { duration: 500, easing: 'ease-out', pseudoElement: '::after' }
         );
 
-        // এনিমেশন স্টাইল (শুধুমাত্র এনিমেশনের সময় ::after-এ লাগবে)
         const style = document.createElement('style');
         style.id = 'theme-anim-style';
-        style.textContent = `
-            html::after {
-                content: '';
-                position: fixed;
-                inset: 0;
-                background: ${isDark ? '#020617' : '#f8fafc'};
-                z-index: 1000;
-                pointer-events: none;
-            }
-        `;
+        style.textContent = `html::after { content: ''; position: fixed; inset: 0; background: ${isDark ? '#020617' : '#f8fafc'}; z-index: 1000; pointer-events: none; }`;
         document.head.appendChild(style);
 
         animation.onfinish = () => {
-            // এনিমেশন শেষে আসল থিম অ্যাপ্লাই এবং অস্থায়ী স্টাইল ডিলিট
             if (isDark) htmlEl.setAttribute('data-theme', 'dark');
             else htmlEl.removeAttribute('data-theme');
             htmlEl.removeAttribute('data-theme-animating');
@@ -296,20 +288,15 @@
         };
     }
 
-    // Handle Button Click
     themeBtn.addEventListener('click', () => {
         if (currentMode === 'system') currentMode = 'dark';
         else if (currentMode === 'dark') currentMode = 'light';
         else currentMode = 'system';
-        
         localStorage.setItem('themeMode', currentMode);
         applyTheme(currentMode);
     });
 
-    // Initial Load (Skip animation)
     applyTheme(currentMode, true);
-
-    // Watch for OS theme changes (Skip animation)
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
         if (currentMode === 'system') applyTheme('system', true);
     });
