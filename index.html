@@ -11,60 +11,65 @@
         /* কালার ভ্যারিয়েবল - লাইট মোড (ডিফল্ট) */
         :root { 
             --primary: #0f172a; --secondary: #3b82f6; --accent: #ef4444; --resume: #16a34a; --bkash: #e2136e; --nagad: #f15a22; --rocket: #8c3494; 
-            --card-bg: #fff; --card-box: #fff; --inner-bg: #f8fafc; --border-color: #e2e8f0; --label-color: #334155; --copy-btn-text: #fff;
-            /* লাইভ ওয়ালপেপার কালার (লাইট) */
-            --live-bg: linear-gradient(-45deg, #e0f2fe, #f8fafc, #dbeafe, #e2e8f0);
-            --live-header: linear-gradient(-45deg, #1e293b, #3b82f6, #0f172a, #2563eb);
+            /* Glassmorphism এর জন্য হালকা ট্রান্সপারেন্ট কালার */
+            --card-bg: rgba(255, 255, 255, 0.85); 
+            --card-box: rgba(255, 255, 255, 0.9); 
+            --inner-bg: rgba(248, 250, 252, 0.8); 
+            --border-color: rgba(226, 232, 240, 0.8); 
+            --label-color: #334155; --copy-btn-text: #fff;
+            --bg-base: #f1f5f9;
         }
         
         /* কালার ভ্যারিয়েবল - ডার্ক মোড */
         [data-theme="dark"] {
-            --primary: #f8fafc; --card-bg: #0f172a; --card-box: #1e293b; --inner-bg: #020617; --border-color: #334155; --label-color: #cbd5e1; --copy-btn-text: #020617;
-            /* লাইভ ওয়ালপেপার কালার (ডার্ক) */
-            --live-bg: linear-gradient(-45deg, #020617, #0f172a, #1e293b, #020617);
-            --live-header: linear-gradient(-45deg, #020617, #1d4ed8, #0f172a, #1e40af);
+            --primary: #f8fafc; --label-color: #cbd5e1; --copy-btn-text: #020617;
+            --card-bg: rgba(15, 23, 42, 0.75); 
+            --card-box: rgba(30, 41, 59, 0.8); 
+            --inner-bg: rgba(2, 6, 23, 0.6); 
+            --border-color: rgba(51, 65, 85, 0.6);
+            --bg-base: #020617;
         }
 
-        /* লাইভ ওয়ালপেপার এনিমেশন */
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* স্মুথ থিম ট্রানজিশন */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease; }
+        
+        body { background: var(--bg-base); display: flex; justify-content: center; min-height: 100vh; padding: 15px 10px; overflow-x: hidden; position: relative; }
+        
+        /* প্রো লাইভ ওয়ালপেপার (Animated Background Orbs) */
+        .bg-shapes { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--bg-base); }
+        .shape { position: absolute; filter: blur(80px); opacity: 0.5; animation: float 15s infinite alternate ease-in-out; }
+        .shape-1 { width: 400px; height: 400px; background: var(--secondary); top: -10%; left: -10%; }
+        .shape-2 { width: 350px; height: 350px; background: var(--accent); bottom: -10%; right: -10%; animation-delay: -5s; }
+        .shape-3 { width: 300px; height: 300px; background: #8b5cf6; top: 40%; left: 40%; animation-delay: -10s; }
+        
+        [data-theme="dark"] .shape { opacity: 0.3; }
+
+        @keyframes float { 
+            0% { transform: translate(0, 0) scale(1); } 
+            100% { transform: translate(60px, 80px) scale(1.2); } 
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        /* কার্ডে গ্লাস ইফেক্ট (Backdrop Filter) */
+        .main-card { width: 100%; max-width: 500px; background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 40px; border: 1px solid var(--border-color); box-shadow: 0 20px 50px rgba(0,0,0,0.1); overflow: hidden; position: relative; z-index: 1; }
         
-        body { 
-            background: var(--live-bg); 
-            background-size: 400% 400%; 
-            animation: gradientMove 12s ease infinite; /* বডি লাইভ ওয়ালপেপার */
-            display: flex; justify-content: center; min-height: 100vh; padding: 15px 10px; overflow-x: hidden; 
-        }
+        .header { height: 240px; background: linear-gradient(135deg, rgba(30,41,59,0.9) 0%, rgba(51,65,85,0.9) 100%); border-radius: 0 0 50px 50px; position: relative; }
         
-        .main-card { width: 100%; max-width: 500px; background: var(--card-bg); border-radius: 40px; border: 1px solid var(--border-color); box-shadow: 0 15px 40px rgba(0,0,0,0.08); overflow: hidden; position: relative; z-index: 1; }
-        
-        .header { 
-            height: 240px; 
-            background: var(--live-header); 
-            background-size: 400% 400%; 
-            animation: gradientMove 10s ease infinite; /* হেডার লাইভ ওয়ালপেপার */
-            border-radius: 0 0 50px 50px; position: relative; 
-        }
-        
-        /* থিম চেঞ্জ বাটন */
-        .theme-toggle-btn { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.15); border: none; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; backdrop-filter: blur(5px); z-index: 10; transition: 0.2s; border: 1px solid rgba(255,255,255,0.2); }
-        .theme-toggle-btn:active { transform: scale(0.9); }
+        /* নতুন স্মুথ থিম বাটন */
+        .theme-toggle-btn { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.15); border: none; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; backdrop-filter: blur(5px); z-index: 10; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .theme-toggle-btn i { transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s; }
+        .theme-toggle-btn.animating i { transform: rotate(180deg) scale(0.5); opacity: 0; }
+
+        /* প্রো বাটন ক্লিক এনিমেশন (Smooth bounce) */
+        .clickable { cursor: pointer; transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s, filter 0.2s; }
+        .clickable:active { transform: scale(0.93) translateY(2px); filter: brightness(0.9); }
 
         .profile-wrapper { text-align: center; margin-top: -200px; position: relative; z-index: 5; }
-        .profile-img { width: 260px; height: 260px; border-radius: 50%; border: 12px solid var(--card-bg); object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
-        .blood-badge { position: absolute; bottom: 45px; right: 24%; background: var(--accent); color: white; padding: 8px 20px; border-radius: 20px; font-weight: 800; border: 5px solid var(--card-bg); font-size: 15px; }
+        .profile-img { width: 260px; height: 260px; border-radius: 50%; border: 12px solid rgba(255,255,255,0.2); object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .blood-badge { position: absolute; bottom: 45px; right: 24%; background: var(--accent); color: white; padding: 8px 20px; border-radius: 20px; font-weight: 800; border: 5px solid rgba(255,255,255,0.2); font-size: 15px; }
         
         .user-info { text-align: center; padding: 20px 0 10px; }
         .user-info h1 { font-size: 34px; color: var(--primary); font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
         .user-info p { color: var(--secondary); font-weight: 600; font-size: 18px; margin-top: 5px; }
-
-        .clickable { transition: 0.1s; cursor: pointer; }
-        .clickable:active { transform: scale(0.96); }
         
         .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 30px 15px; }
         .btn { padding: 18px; border-radius: 22px; text-decoration: none; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 15px; border: none; }
@@ -109,6 +114,15 @@
         .wallet-num-container .number { font-size: 20px; font-weight: 900; color: var(--primary); letter-spacing: 1px; word-break: break-all; }
         .wallet-copy { background: var(--primary); color: var(--copy-btn-text); border: none; padding: 8px 15px; border-radius: 8px; font-weight: 700; font-size: 12px; display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 
+        /* নতুন মেসেজ বক্স (Contact Form) */
+        .contact-form { display: flex; flex-direction: column; gap: 15px; background: var(--card-box); padding: 25px; border-radius: 25px; border: 1px solid var(--border-color); }
+        .input-group { position: relative; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 16px 20px; border-radius: 15px; background: var(--inner-bg); border: 1px solid var(--border-color); color: var(--primary); font-size: 15px; font-weight: 600; font-family: 'Outfit', sans-serif; outline: none; transition: 0.3s; box-sizing: border-box; }
+        .contact-form input::placeholder, .contact-form textarea::placeholder { color: #94a3b8; font-weight: 400; }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--secondary); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); }
+        
+        .send-msg-btn { background: #38bdf8; color: #0f172a; border: none; padding: 18px; border-radius: 15px; font-weight: 800; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 5px; }
+
         .visitor-section { text-align: center; padding: 20px; border-top: 1px solid var(--border-color); }
         .footer { text-align: center; padding: 20px 20px 40px; color: #cbd5e1; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; }
 
@@ -128,13 +142,20 @@
             .icon-box span { font-size: 10px; }
             .wallet-num-container { flex-direction: column; padding: 12px; gap: 12px; }
             .wallet-copy { width: 100%; justify-content: center; padding: 10px; }
+            .contact-form { padding: 20px; }
         }
     </style>
 </head>
 <body>
+<div class="bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+</div>
+
 <div class="main-card">
     <div class="header">
-        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+        <button id="themeToggle" class="theme-toggle-btn clickable" aria-label="Toggle Theme">
             <i class="fas fa-desktop"></i>
         </button>
     </div>
@@ -210,6 +231,23 @@
             <i class="fas fa-house-chimney"></i>
             <div class="info-text"><strong>Permanent Address</strong><p>Bahir Daspara, Bauphal, Patuakhali, Bangladesh</p></div>
         </a>
+
+        <div class="label" style="margin-top: 35px;">Send a Direct Message</div>
+        <form class="contact-form" onsubmit="sendDirectMessage(event)">
+            <div class="input-group">
+                <input type="text" id="senderName" placeholder="Full Name" required>
+            </div>
+            <div class="input-group">
+                <input type="email" id="senderEmail" placeholder="Email Address" required>
+            </div>
+            <div class="input-group">
+                <textarea id="senderMsg" placeholder="Your Message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="send-msg-btn clickable">
+                Send Message <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+
     </div>
 
     <div class="visitor-section">
@@ -244,61 +282,52 @@
         }
     }
 
-    // Theme Switcher Logic with Reveal Animation
+    // Direct Message Form Logic
+    function sendDirectMessage(event) {
+        event.preventDefault();
+        const name = document.getElementById('senderName').value;
+        const email = document.getElementById('senderEmail').value;
+        const msg = document.getElementById('senderMsg').value;
+        
+        // এটি সরাসরি ইমেইল অ্যাপ ওপেন করে দেবে মেসেজ সহ
+        const mailtoLink = `mailto:mdprince3302@gmail.com?subject=New Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(msg)}%0D%0A%0D%0ASender Email: ${encodeURIComponent(email)}`;
+        window.location.href = mailtoLink;
+    }
+
+    // Smooth Theme Switcher Logic
     const htmlEl = document.documentElement;
     const themeBtn = document.getElementById('themeToggle');
+    const themeIcon = themeBtn.querySelector('i');
     let currentMode = localStorage.getItem('themeMode') || 'system';
 
     const icons = { 'system': 'fa-desktop', 'dark': 'fa-moon', 'light': 'fa-sun' };
 
-    function applyTheme(mode, skipAnimation = false) {
+    function applyTheme(mode) {
         let isDark = (mode === 'system') ? window.matchMedia('(prefers-color-scheme: dark)').matches : (mode === 'dark');
 
-        if (skipAnimation) {
-            if (isDark) htmlEl.setAttribute('data-theme', 'dark');
-            else htmlEl.removeAttribute('data-theme');
-            themeBtn.innerHTML = `<i class="fas ${icons[mode]}"></i>`;
-            return;
-        }
-
-        const rect = themeBtn.getBoundingClientRect();
-        const x = rect.left + rect.width / 2;
-        const y = rect.top + rect.height / 2;
-        const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-
-        htmlEl.setAttribute('data-theme-animating', isDark ? 'dark' : 'light');
-
-        const animation = htmlEl.animate(
-            [ { clipPath: `circle(0px at ${x}px ${y}px)` }, { clipPath: `circle(${endRadius}px at ${x}px ${y}px)` } ],
-            { duration: 500, easing: 'ease-out', pseudoElement: '::after' }
-        );
-
-        const style = document.createElement('style');
-        style.id = 'theme-anim-style';
-        style.textContent = `html::after { content: ''; position: fixed; inset: 0; background: ${isDark ? '#020617' : '#f8fafc'}; z-index: 1000; pointer-events: none; }`;
-        document.head.appendChild(style);
-
-        animation.onfinish = () => {
-            if (isDark) htmlEl.setAttribute('data-theme', 'dark');
-            else htmlEl.removeAttribute('data-theme');
-            htmlEl.removeAttribute('data-theme-animating');
-            themeBtn.innerHTML = `<i class="fas ${icons[mode]}"></i>`;
-            const animStyle = document.getElementById('theme-anim-style');
-            if (animStyle) animStyle.remove();
-        };
+        if (isDark) htmlEl.setAttribute('data-theme', 'dark');
+        else htmlEl.removeAttribute('data-theme');
+        
+        // Spin Animation for Icon
+        themeBtn.classList.add('animating');
+        setTimeout(() => {
+            themeIcon.className = `fas ${icons[mode]}`;
+            themeBtn.classList.remove('animating');
+        }, 150);
     }
 
     themeBtn.addEventListener('click', () => {
         if (currentMode === 'system') currentMode = 'dark';
         else if (currentMode === 'dark') currentMode = 'light';
         else currentMode = 'system';
+        
         localStorage.setItem('themeMode', currentMode);
         applyTheme(currentMode);
     });
 
-    applyTheme(currentMode, true);
+    applyTheme(currentMode);
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        if (currentMode === 'system') applyTheme('system', true);
+        if (currentMode === 'system') applyTheme('system');
     });
 </script>
 </body>
