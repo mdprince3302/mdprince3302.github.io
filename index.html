@@ -22,7 +22,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background 0.3s, color 0.3s, border-color 0.3s; }
         body { background: var(--bg); display: flex; justify-content: center; min-height: 100vh; padding: 15px 10px; overflow-x: hidden; }
         
-        .main-card { width: 100%; max-width: 500px; background: var(--card-bg); border-radius: 40px; border: 1px solid var(--border-color); box-shadow: 0 15px 40px rgba(0,0,0,0.08); overflow: hidden; position: relative; }
+        .main-card { width: 100%; max-width: 500px; background: var(--card-bg); border-radius: 40px; border: 1px solid var(--border-color); box-shadow: 0 15px 40px rgba(0,0,0,0.08); overflow: hidden; position: relative; z-index: 1; }
         
         .header { height: 240px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 0 0 50px 50px; position: relative; }
         
@@ -86,6 +86,9 @@
 
         .visitor-section { text-align: center; padding: 20px; border-top: 1px solid var(--border-color); }
         .footer { text-align: center; padding: 20px 20px 40px; color: #cbd5e1; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; }
+
+        /* এনিমেশন ওভারলে */
+        .theme-animation-overlay { position: fixed; inset: 0; background: var(--card-bg); z-index: 1000; pointer-events: none; }
 
         @media (max-width: 450px) {
             .header { height: 180px; }
@@ -230,7 +233,7 @@
         'light': 'fa-sun'
     };
 
-    function applyTheme(mode) {
+    function applyTheme(mode, skipAnimation = false) {
         let isDark = false;
         if (mode === 'system') {
             isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -238,12 +241,59 @@
             isDark = (mode === 'dark');
         }
 
-        if (isDark) {
-            htmlEl.setAttribute('data-theme', 'dark');
-        } else {
-            htmlEl.removeAttribute('data-theme');
+        // বাটন লোডের সময় বা সিস্টেম চেঞ্জের সময় এনিমেশন হবে না
+        if (skipAnimation) {
+            if (isDark) htmlEl.setAttribute('data-theme', 'dark');
+            else htmlEl.removeAttribute('data-theme');
+            themeBtn.innerHTML = `<i class="fas ${icons[mode]}"></i>`;
+            return;
         }
-        themeBtn.innerHTML = `<i class="fas ${icons[mode]}"></i>`;
+
+        // বাটন টিপলে সুন্দর সার্কুলার এনিমেশন
+        const rect = themeBtn.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+
+        // এনিমেশন শুরু হওয়ার আগে HTML-এ temporary data attribute
+        htmlEl.setAttribute('data-theme-animating', isDark ? 'dark' : 'light');
+
+        const animation = htmlEl.animate(
+            [
+                { clipPath: `circle(0px at ${x}px ${y}px)` },
+                { clipPath: `circle(${endRadius}px at ${x}px ${y}px)` }
+            ],
+            {
+                duration: 500,
+                easing: 'ease-out',
+                pseudoElement: '::after'
+            }
+        );
+
+        // এনিমেশন স্টাইল (শুধুমাত্র এনিমেশনের সময় ::after-এ লাগবে)
+        const style = document.createElement('style');
+        style.id = 'theme-anim-style';
+        style.textContent = `
+            html::after {
+                content: '';
+                position: fixed;
+                inset: 0;
+                background: ${isDark ? '#020617' : '#f8fafc'};
+                z-index: 1000;
+                pointer-events: none;
+            }
+        `;
+        document.head.appendChild(style);
+
+        animation.onfinish = () => {
+            // এনিমেশন শেষে আসল থিম অ্যাপ্লাই এবং অস্থায়ী স্টাইল ডিলিট
+            if (isDark) htmlEl.setAttribute('data-theme', 'dark');
+            else htmlEl.removeAttribute('data-theme');
+            htmlEl.removeAttribute('data-theme-animating');
+            themeBtn.innerHTML = `<i class="fas ${icons[mode]}"></i>`;
+            const animStyle = document.getElementById('theme-anim-style');
+            if (animStyle) animStyle.remove();
+        };
     }
 
     // Handle Button Click
@@ -256,12 +306,12 @@
         applyTheme(currentMode);
     });
 
-    // Initial Load
-    applyTheme(currentMode);
+    // Initial Load (Skip animation)
+    applyTheme(currentMode, true);
 
-    // Watch for OS theme changes if on 'system' mode
+    // Watch for OS theme changes (Skip animation)
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        if (currentMode === 'system') applyTheme('system');
+        if (currentMode === 'system') applyTheme('system', true);
     });
 </script>
 </body>
