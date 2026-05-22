@@ -14,9 +14,6 @@
             --card-bg: rgba(255, 255, 255, 0.85); --card-box: rgba(255, 255, 255, 0.9); --inner-bg: rgba(248, 250, 252, 0.8); 
             --border-color: rgba(226, 232, 240, 0.8); --label-color: #334155; --copy-btn-text: #fff;
             --bg-base: #f8fafc; --grid-color: rgba(59, 130, 246, 0.1);
-            
-            /* rotating border colors */
-            --rotate-color-1: #3b82f6; --rotate-color-2: #0ea5e9; --rotate-color-3: #22d3ee;
         }
         
         [data-theme="dark"] {
@@ -65,12 +62,64 @@
 
         .profile-wrapper { text-align: center; margin-top: -160px; position: relative; z-index: 5; display: flex; justify-content: center; align-items: center; }
         
-        /* New profile container with rotating border animation */
-        .profile-container { width: 300px; height: 300px; border-radius: 50%; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 2;}
-        .profile-container::before { content: ''; position: absolute; inset: -50px; background: conic-gradient(var(--rotate-color-1), var(--rotate-color-2), var(--rotate-color-3), transparent, transparent, var(--rotate-color-1)); animation: rotateBorder 4s linear infinite; }
-        .profile-container::after { content: ''; position: absolute; inset: 12px; background: var(--card-bg); border-radius: 50%; z-index: 1; border: 2px solid var(--border-color); }
-        .profile-img { width: calc(100% - 24px); height: calc(100% - 24px); border-radius: 50%; object-fit: cover; position: relative; z-index: 2; border: 8px solid rgba(255,255,255,0.1); }
-        @keyframes rotateBorder { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        /* ছবির চার সাইডে ঘুরন্ত সুন্দর কালার এনিমেশন কন্টেইনার */
+        .profile-container {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Hide excess rotating content */
+            background: #fff; /* Internal BG */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            z-index: 2;
+        }
+        
+        /* ঘুরন্ত বর্ডার ইফেক্ট */
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            inset: -50px; /* Expand past edges */
+            background: conic-gradient(
+                from 0deg,
+                #3b82f6, /* Blue */
+                #0ea5e9, /* Cyan */
+                #a855f7, /* Purple */
+                #ec4899, /* Pink */
+                #3b82f6  /* Back to blue */
+            );
+            animation: spinBorder 4s linear infinite;
+            border-radius: 50%;
+        }
+        
+        /* ইন্টারনাল মাস্ক (ক্লিন হোয়াইট এরিয়া) */
+        .profile-container::after {
+            content: '';
+            position: absolute;
+            inset: 10px; /* Internal margin = border thickness */
+            background: #fff; /* Internal solid color */
+            border-radius: 50%;
+            z-index: 1; /* Under image, over before */
+        }
+        
+        /* প্রোফাইল ইমেজ */
+        .profile-img { 
+            width: calc(100% - 20px); /* Internal area */
+            height: calc(100% - 20px);
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 2px solid rgba(226, 232, 240, 0.2); /* very subtle edge */
+            position: relative; /* ensure proper stacking */
+            z-index: 2; /* Over everything */
+        }
+        
+        /* ঘুরন্ত এনিমেশন */
+        @keyframes spinBorder {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
         .blood-badge { position: absolute; bottom: 35px; right: 28%; background: var(--accent); color: white; padding: 8px 18px; border-radius: 20px; font-weight: 800; border: 5px solid rgba(255,255,255,0.2); font-size: 15px; display: flex; align-items: center; gap: 6px; box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3); z-index: 10; }
         
@@ -108,7 +157,7 @@
 
         .resume-btn { display: flex; align-items: center; justify-content: center; gap: 12px; text-decoration: none; background: var(--resume); color: white; padding: 20px; border-radius: 25px; font-weight: 700; font-size: 16px; margin-top: 10px; box-shadow: 0 10px 25px rgba(22, 163, 74, 0.15); width: 100%; box-sizing: border-box; }
 
-        .pay-btn-pro { display: flex; align-items: center; justify-content: center; gap: 12px; text-decoration: none; background: linear-gradient(135deg, var(--bkash) 0%, var(--nagad) 50%, var(--rocket) 100%); color: white; padding: 20px; border-radius: 25px; font-weight: 800; font-size: 16px; margin-top: 15px; box-shadow: 0 10px 25px rgba(226, 19, 110, 0.3); width: 100%; border: none; }
+        .pay-btn-pro { display: flex; align-items: center; justify-content: center; gap: 12px; text-decoration: none; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; padding: 20px; border-radius: 25px; font-weight: 800; font-size: 16px; margin-top: 15px; box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3); width: 100%; border: none; }
 
         .contact-form { display: flex; flex-direction: column; gap: 15px; background: var(--card-box); padding: 25px; border-radius: 25px; border: 1px solid var(--border-color); }
         .input-group { position: relative; }
@@ -136,8 +185,9 @@
         @media (max-width: 450px) {
             .header { height: 180px; }
             .profile-wrapper { margin-top: -120px; }
-            .profile-container { width: 220px; height: 220px; border-width: 8px; }
-            .profile-img { width: 100%; height: 100%; border-width: 6px; }
+            .profile-container { width: 220px; height: 220px; }
+            .profile-container::after { inset: 8px; }
+            .profile-img { width: calc(100% - 16px); height: calc(100% - 16px); border-width: 4px; }
             .blood-badge { bottom: 20px; right: 25%; padding: 6px 15px; font-size: 13px; border-width: 4px; }
             .user-info h1 { font-size: 26px; }
             .user-info p { font-size: 15px; }
@@ -225,7 +275,7 @@
             <i class="fas fa-location-dot"></i>
             <div class="info-text"><strong>Present Address</strong><p>Model Town, Keraniganj, Dhaka, Bangladesh</p></div>
         </a>
-        <a href="Https://maps.app.goo.gl/oA4SXAdHg1jhUjXG8" target="_blank" class="clickable-card clickable">
+        <a href="http://googlehttp://googleusercontent.com/maps.google.com/3" target="_blank" class="clickable-card clickable">
             <i class="fas fa-house-chimney"></i>
             <div class="info-text"><strong>Permanent Address</strong><p>Bahir Daspara, Bauphal, Patuakhali, Bangladesh</p></div>
         </a>
