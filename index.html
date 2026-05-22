@@ -14,9 +14,6 @@
             --card-bg: rgba(255, 255, 255, 0.85); --card-box: rgba(255, 255, 255, 0.9); --inner-bg: rgba(248, 250, 252, 0.8); 
             --border-color: rgba(226, 232, 240, 0.8); --label-color: #334155; --copy-btn-text: #fff;
             --bg-base: #f8fafc; --grid-color: rgba(59, 130, 246, 0.1);
-            
-            /* rotating border colors */
-            --rotate-color-1: #3b82f6; --rotate-color-2: #0ea5e9; --rotate-color-3: #22d3ee;
         }
         
         [data-theme="dark"] {
@@ -53,14 +50,12 @@
         .clickable { cursor: pointer; transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s ease-in-out; }
         .clickable:active { transform: scale(0.92) !important; box-shadow: 0 0 20px rgba(59, 130, 246, 0.6) !important; }
 
-        .profile-wrapper { text-align: center; margin-top: -200px; position: relative; z-index: 5; display: flex; justify-content: center; align-items: center; }
+        .profile-wrapper { text-align: center; margin-top: -160px; position: relative; z-index: 5; display: flex; justify-content: center; align-items: center; }
         
-        /* New profile container with rotating border animation */
-        .profile-container { width: 260px; height: 260px; border-radius: 50%; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
-        .profile-container::before { content: ''; position: absolute; inset: -50px; background: conic-gradient(var(--rotate-color-1), var(--rotate-color-2), var(--rotate-color-3), transparent, transparent, var(--rotate-color-1)); animation: rotateBorder 4s linear infinite; }
-        .profile-container::after { content: ''; position: absolute; inset: 12px; background: var(--card-bg); border-radius: 50%; z-index: 1; border: 2px solid var(--border-color); }
-        .profile-img { width: calc(100% - 24px); height: calc(100% - 24px); border-radius: 50%; object-fit: cover; position: relative; z-index: 2; border: 8px solid rgba(255,255,255,0.1); }
-        @keyframes rotateBorder { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        /* Revised profile container with solid white border and no animation */
+        .profile-container { width: 300px; height: 300px; border-radius: 50%; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; background: #fff; border: 10px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 2;}
+        
+        .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 8px solid rgba(255,255,255,0.1); }
 
         .blood-badge { position: absolute; bottom: 35px; right: 28%; background: var(--accent); color: white; padding: 8px 18px; border-radius: 20px; font-weight: 800; border: 5px solid rgba(255,255,255,0.2); font-size: 15px; display: flex; align-items: center; gap: 6px; box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3); z-index: 10; }
         
@@ -125,10 +120,9 @@
 
         @media (max-width: 450px) {
             .header { height: 180px; }
-            .profile-wrapper { margin-top: -140px; }
-            .profile-container { width: 180px; height: 180px; }
-            .profile-container::after { inset: 8px; }
-            .profile-img { width: calc(100% - 16px); height: calc(100% - 16px); border-width: 4px; }
+            .profile-wrapper { margin-top: -120px; }
+            .profile-container { width: 220px; height: 220px; border-width: 8px; }
+            .profile-img { width: 100%; height: 100%; border-width: 6px; }
             .blood-badge { bottom: 20px; right: 25%; padding: 6px 15px; font-size: 13px; border-width: 4px; }
             .user-info h1 { font-size: 26px; }
             .user-info p { font-size: 15px; }
@@ -195,7 +189,7 @@
         </div>
 
         <div class="label" style="margin-top: 35px;">Resume / CV</div>
-        <a href="https://drive.google.com/file/d/16j6xsn6o6O9KI-nzsN-riNscbZPNssEr/view" class="resume-btn clickable" style="margin-top: 0;">
+        <a href="https://drive.google.com/file/d/16j6xsn6o9KI-nzsN-riNscbZPNssEr/view" class="resume-btn clickable" style="margin-top: 0;">
             <i class="fas fa-file-pdf"></i> Download Resume
         </a>
         
