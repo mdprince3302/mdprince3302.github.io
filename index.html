@@ -41,15 +41,20 @@
         .theme-toggle-btn i { transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s; }
         .theme-toggle-btn.animating i { transform: rotate(180deg) scale(0.5); opacity: 0; }
 
-        /* Themed Header, using uploaded blue circuit board image */
+        /* নতুন লাইট কালার এনিমেটেড হেডার (কভার) */
         .header { 
             height: 240px; 
-            background-image: url('39501.jpg');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(45deg, #e0f2fe, #bae6fd, #e0e7ff, #f3e8ff);
+            background-size: 300% 300%;
+            animation: coverAnimation 6s ease infinite;
             border-radius: 40px 40px 50px 50px; 
             position: relative; 
             overflow: hidden;
+        }
+        @keyframes coverAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .clickable { cursor: pointer; transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s ease-in-out; }
@@ -143,7 +148,7 @@
             .profile-wrapper { margin-top: -140px; }
             .profile-container { width: 180px; height: 180px; }
             .profile-container::after { inset: 6px; }
-            .profile-img { width: calc(100% - 16px); height: calc(100% - 16px); border-width: 3px; }
+            .profile-img { width: calc(100% - 12px); height: calc(100% - 12px); border-width: 3px; }
             .blood-badge { bottom: 10px; right: 22%; padding: 5px 12px; font-size: 11px; border-width: 3px; }
             .user-info h1 { font-size: 26px; }
             .user-info p { font-size: 15px; }
